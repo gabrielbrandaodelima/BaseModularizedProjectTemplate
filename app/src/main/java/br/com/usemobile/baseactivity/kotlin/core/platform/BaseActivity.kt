@@ -1,15 +1,18 @@
 package br.com.usemobile.baseactivity.kotlin.core.platform
 
+import android.os.Build
 import android.os.Bundle
 import android.os.Handler
 import androidx.appcompat.app.AppCompatActivity;
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.ProgressBar
 import br.com.usemobile.baseactivity.kotlin.R
 import br.com.usemobile.baseactivity.kotlin.core.extension.activityLogin
 import br.com.usemobile.baseactivity.kotlin.core.extension.activityMenu
 import br.com.usemobile.baseactivity.kotlin.core.extension.empty
 import es.dmoral.toasty.Toasty
+import kotlinx.android.synthetic.main.progress_bar.*
 
 import kotlinx.android.synthetic.main.toolbar.*
 
@@ -21,9 +24,13 @@ import kotlinx.android.synthetic.main.toolbar.*
 abstract class BaseActivity(private val childActivityName: String = String.empty()) : AppCompatActivity() {
 
     private var doubleBackToExit: Boolean = false
+    lateinit var progressBar: ProgressBar
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        progressBar = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) menu_frag_progress_bar
+        else menu_frag_progress_bar_api21
+
         setUpActv(savedInstanceState)
 
     }

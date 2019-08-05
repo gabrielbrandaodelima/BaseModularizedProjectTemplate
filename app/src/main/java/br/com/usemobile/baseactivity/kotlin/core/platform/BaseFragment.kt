@@ -42,14 +42,14 @@ abstract class BaseFragment : Fragment() {
 
     internal fun firstTimeCreated(savedInstanceState: Bundle?) = savedInstanceState == null
 
-    internal fun showProgress() = progressStatus(View.VISIBLE)
+    internal fun showProgressBar() = progressStatus(View.VISIBLE)
 
-    internal fun hideProgress() = progressStatus(View.GONE)
+    internal fun hideProgressBar() = progressStatus(View.GONE)
 
     private fun progressStatus(viewStatus: Int) =
         with(activity) {
-//            if (this is BaseActivity)
-//                this.progress.visibility = viewStatus
+            if (this is BaseActivity)
+                progressBar.visibility = viewStatus
         }
 
     internal fun notify(@StringRes message: Int) =
