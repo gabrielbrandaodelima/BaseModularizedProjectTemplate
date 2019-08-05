@@ -17,29 +17,39 @@
 package br.com.usemobile.baseactivity.kotlin.features
 
 import android.os.Bundle
-import android.view.*
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
-import androidx.navigation.fragment.NavHostFragment.findNavController
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import br.com.usemobile.baseactivity.kotlin.R
 import br.com.usemobile.baseactivity.kotlin.core.platform.BaseFragment
-import kotlinx.android.synthetic.main.home_fragment.*
+import kotlinx.android.synthetic.main.flow_step_one_fragment.*
 
 /**
- * Fragment used to show how to navigate to another destination
+ * Presents how multiple steps flow could be implemented.
  */
-class MainFragment : BaseFragment() {
-    override fun layoutId() = R.layout.home_fragment
+class FlowStepFragment : BaseFragment() {
+    override fun layoutId(): Int {
+
+        val flowStepNumber = arguments?.getInt("flowStepNumber")
+
+        return when (flowStepNumber) {
+            2 -> R.layout.flow_step_two_fragment
+            else -> R.layout.flow_step_one_fragment
+        }
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        navigate_destination_button.setOnClickListener {
-            findNavController().navigate(R.id.flow_step_one_dest, null)
-        }
 
-//        navigate_action_button.setOnClickListener {
-//            Navigation.createNavigateOnClickListener(R.id.next_action, null)
-//        }
+        next_button.setOnClickListener {
+            findNavController().navigate(R.id.mainFragment)
+        }
+//        next_button.setOnClickListener(
+//            Navigation.createNavigateOnClickListener(R.id.next_action)
+//        )
     }
 }

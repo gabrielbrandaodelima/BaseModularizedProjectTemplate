@@ -7,4 +7,38 @@
               android:name="br.com.usemobile.baseactivity.kotlin.features.MainFragment"
               android:label="MainFragment"
     tools:layout="@layout/home_fragment"/>
+    <fragment
+            android:id="@+id/flow_step_one_dest"
+            android:name="br.com.usemobile.baseactivity.kotlin.features.FlowStepFragment"
+            tools:layout="@layout/flow_step_one_fragment"
+    >
+        <argument
+                android:name="flowStepNumber"
+                app:argType="integer"
+                android:defaultValue="1"/>
+
+        <action
+                android:id="@+id/next_action"
+                app:destination="@+id/flow_step_two_dest">
+        </action>
+    </fragment>
+
+    <fragment
+            android:id="@+id/flow_step_two_dest"
+            android:name="br.com.usemobile.baseactivity.kotlin.features.FlowStepFragment"
+            tools:layout="@layout/flow_step_two_fragment"
+    >
+
+        <argument
+                android:name="flowStepNumber"
+                app:argType="integer"
+                android:defaultValue="2"/>
+
+        <action
+                android:id="@+id/next_action"
+                app:popUpTo="@id/mainFragment">
+        </action>
+    </fragment>
+
+
 </navigation>
