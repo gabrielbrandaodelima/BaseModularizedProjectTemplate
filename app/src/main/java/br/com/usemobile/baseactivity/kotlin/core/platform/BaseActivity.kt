@@ -7,11 +7,19 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.ProgressBar
+import androidx.drawerlayout.widget.DrawerLayout
+import androidx.navigation.NavController
+import androidx.navigation.Navigation
+import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.navigateUp
+import androidx.navigation.ui.setupActionBarWithNavController
 import br.com.usemobile.baseactivity.kotlin.R
 import br.com.usemobile.baseactivity.kotlin.core.extension.activityLogin
 import br.com.usemobile.baseactivity.kotlin.core.extension.activityMenu
 import br.com.usemobile.baseactivity.kotlin.core.extension.empty
 import es.dmoral.toasty.Toasty
+import kotlinx.android.synthetic.main.activity_base.*
 import kotlinx.android.synthetic.main.progress_bar.*
 
 import kotlinx.android.synthetic.main.toolbar.*
@@ -23,19 +31,28 @@ import kotlinx.android.synthetic.main.toolbar.*
  */
 abstract class BaseActivity(private val childActivityName: String = String.empty()) : AppCompatActivity() {
 
+    private lateinit var appBarConfiguration : AppBarConfiguration
+    private lateinit var navController: NavController
+    private var drawerLayout: DrawerLayout? = null
+
+
     private var doubleBackToExit: Boolean = false
     lateinit var progressBar: ProgressBar
 
+    open fun navHostFragment() : Int = R.id.base_atv_nav_host_fragment
+
+    abstract fun toolbarTitle() : String
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        progressBar = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) menu_frag_progress_bar
-        else menu_frag_progress_bar_api21
+        progressBar =
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) menu_frag_progress_bar else menu_frag_progress_bar_api21
 
-        setUpActv(savedInstanceState)
+        setUpActv()
 
     }
 
-    private fun setUpActv(savedInstanceState: Bundle?) {
+    private fun setUpActv() {
         when (childActivityName) {
             activityLogin -> {
 //                setContentView(R.layout.activity_login)
@@ -56,25 +73,25 @@ abstract class BaseActivity(private val childActivityName: String = String.empty
 
         supportActionBar?.setDisplayShowTitleEnabled(false)
         supportActionBar?.setDisplayHomeAsUpEnabled(false)
+        setUpNavControllerAndAppbar()
+        setupActionBar(navController, appBarConfiguration)
+        title_toolbar.text = toolbarTitle()
 
     }
 
-    override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        menuInflater.inflate(R.menu.menu_main, menu)
-        return true
+    private fun setUpNavControllerAndAppbar() {
+        navController = Navigation.findNavController(this, navHostFragment())
+        appBarConfiguration = AppBarConfiguration(navController.graph, drawerLayout)
     }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        return when (item.itemId) {
-            R.id.action_settings -> true
-            else -> super.onOptionsItemSelected(item)
-        }
+    private fun setupActionBar(navController: NavController,
+                               appBarConfig: AppBarConfiguration) {
+        setupActionBarWithNavController(navController, appBarConfig)
     }
 
+    override fun onSupportNavigateUp(): Boolean {
+        return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
+    }
 
     override fun onBackPressed() {
 
@@ -82,7 +99,7 @@ abstract class BaseActivity(private val childActivityName: String = String.empty
         when {
             doubleBackToExit -> super.onBackPressed()
             childActivityName != activityMenu && childActivityName != activityLogin -> super.onBackPressed()
-            else -> showMessage(getString(R.string.title_press_again_to_exit),false)
+            else -> showMessage(getString(R.string.title_press_again_to_exit), false)
         }
         this.doubleBackToExit = true
         Handler().postDelayed({ doubleBackToExit = false }, 2000)
