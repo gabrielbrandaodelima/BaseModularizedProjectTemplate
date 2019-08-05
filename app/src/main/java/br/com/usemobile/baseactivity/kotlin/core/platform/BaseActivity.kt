@@ -9,6 +9,7 @@ import android.view.MenuItem
 import android.widget.ProgressBar
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.NavController
+import androidx.navigation.NavDestination
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
@@ -34,6 +35,7 @@ abstract class BaseActivity(private val childActivityName: String = String.empty
 
     private lateinit var appBarConfiguration : AppBarConfiguration
     private lateinit var navController: NavController
+    private lateinit var navDestination: NavDestination
     private var drawerLayout: DrawerLayout? = null
 
 
@@ -82,6 +84,12 @@ abstract class BaseActivity(private val childActivityName: String = String.empty
     private fun setUpNavControllerAndAppbar() {
         navController = Navigation.findNavController(this, navHostFragment())
         appBarConfiguration = AppBarConfiguration(navController.graph, drawerLayout)
+        navController.addOnDestinationChangedListener{controller, destination, arguments ->
+            navDestination = destination
+//            setUpStatusBar()
+//            setUpButton()
+        }
+
     }
 
     private fun setupActionBar(navController: NavController,
