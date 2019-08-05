@@ -14,12 +14,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="?android:selectableItemBackgroundBorderless"
-            android:contentDescription="@string/desc_img_toolbar_home"
             android:paddingStart="3dp"
             android:paddingEnd="10dp"
             android:paddingTop="10dp"
             android:paddingBottom="10dp"
-            android:src="@drawable/ba" />
+            android:src="@drawable/ic_arrow_back_white_24dp" />
 
     <TextView
 
@@ -29,7 +28,6 @@
             android:layout_gravity="center"
             android:layout_weight="7"
             android:ellipsize="end"
-            android:fontFamily="@font/bebas_neue_regular"
             android:gravity="center"
             android:maxLines="1"
             android:textAllCaps="true"
@@ -46,7 +44,6 @@
             android:layout_marginEnd="16dp"
             android:background="?android:selectableItemBackgroundBorderless"
             android:ellipsize="end"
-            android:fontFamily="@font/bebas_neue_regular"
             android:gravity="center"
             android:maxLines="1"
             android:padding="4dp"
@@ -54,7 +51,6 @@
             android:textColor="@android:color/white"
             android:textSize="17sp"
             tools:text="LIMPAR"
-            android:text="@string/subtitle_toolbar_clean"
             android:visibility="gone"/>
 
 </androidx.appcompat.widget.Toolbar>
