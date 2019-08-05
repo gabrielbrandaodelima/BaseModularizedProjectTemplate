@@ -23,7 +23,14 @@ import androidx.annotation.StringRes
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import br.com.usemobile.baseactivity.kotlin.R
+import br.com.usemobile.baseactivity.kotlin.core.exception.Failure
+import br.com.usemobile.baseactivity.kotlin.core.extension.activityMenu
+import br.com.usemobile.baseactivity.kotlin.core.extension.empty
+import br.com.usemobile.baseactivity.kotlin.core.extension.gone
+import br.com.usemobile.baseactivity.kotlin.core.extension.visible
 import com.google.android.material.snackbar.Snackbar
+import es.dmoral.toasty.Toasty
 
 
 /**
@@ -31,7 +38,7 @@ import com.google.android.material.snackbar.Snackbar
  *
  * @see Fragment
  */
-abstract class BaseFragment : Fragment() {
+abstract class BaseFragment(private val childFragmentName: String = String.empty()) : Fragment() {
 
     abstract fun layoutId(): Int
 
@@ -42,17 +49,50 @@ abstract class BaseFragment : Fragment() {
 
     internal fun firstTimeCreated(savedInstanceState: Bundle?) = savedInstanceState == null
 
-    internal fun showProgressBar() = progressStatus(View.VISIBLE)
+    internal fun showProgressBar() = with(activity) {
+        if (this is BaseActivity)
+            progressBar.visible()
+    }
 
-    internal fun hideProgressBar() = progressStatus(View.GONE)
+    internal fun hideProgressBar() = with(activity) {
+        if (this is BaseActivity)
+            progressBar.gone()
+    }
 
-    private fun progressStatus(viewStatus: Int) =
-        with(activity) {
-            if (this is BaseActivity)
-                progressBar.visibility = viewStatus
+    fun handleFailure(failure: Failure?) {
+        when (failure) {
+            is Failure.NetworkConnection -> {
+                when (childFragmentName) {
+                    activityMenu -> showMessage("NetworkConnectionError", true)
+                    else -> handleNetworkError()
+                }
+            }
+            is Failure.ServerError -> showMessage("ServerError", true)
+            is Failure.FeatureFailure -> handleFeatureFailure()
         }
+//        hideAddPageProgress()
+//        hideProgress()
+    }
 
-    internal fun notify(@StringRes message: Int) =
+    private fun handleNetworkError() {
+//        showConnectionErrorView()
+    }
+
+    open fun handleFeatureFailure() {
+        showMessage("BaseFragment handleFeatureFailure", true)
+
+    }
+
+    fun notify(@StringRes message: Int) =
         view?.let { Snackbar.make(it, message, Snackbar.LENGTH_SHORT).show() }
 
+    fun showMessage(message: String, isErrorMessage: Boolean = false) {
+
+        if (isErrorMessage) {
+            activity?.let { Toasty.error(it, message).show() }
+        } else {
+
+            activity?.let { Toasty.success(it, message).show() }
+        }
+    }
 }
