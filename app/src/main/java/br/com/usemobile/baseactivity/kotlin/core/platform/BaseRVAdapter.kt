@@ -24,13 +24,13 @@ abstract class BaseRVAdapter(
     var selected: Boolean = true
     var filterText: Boolean = false
 
-    abstract fun layoutId(): Int
+//    abstract fun layoutId(): Int
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder {
-        val inflater = LayoutInflater.from(parent.context)
-        val view = inflater.inflate(layoutId(), parent, false)
-        return BaseViewHolder(view)
-    }
+//    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder {
+//        val inflater = LayoutInflater.from(parent.context)
+//        val view = inflater.inflate(layoutId(), parent, false)
+//        return BaseViewHolder(view)
+//    }
 
     fun addAll(list: ArrayList<Any>, query: String?) {
         if (!query.isNullOrBlank()) {
@@ -68,7 +68,7 @@ abstract class BaseRVAdapter(
 
     }
 
-    open inner class BaseViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    abstract inner class BaseViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         var view: View = itemView
         open fun bindView() {
