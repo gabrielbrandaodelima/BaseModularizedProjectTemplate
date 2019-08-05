@@ -1,10 +1,15 @@
 package br.com.usemobile.baseactivity.kotlin.core.platform
 
 import android.os.Bundle
+import android.os.Handler
 import androidx.appcompat.app.AppCompatActivity;
 import android.view.Menu
 import android.view.MenuItem
 import br.com.usemobile.baseactivity.kotlin.R
+import br.com.usemobile.baseactivity.kotlin.core.extension.activityLogin
+import br.com.usemobile.baseactivity.kotlin.core.extension.activityMenu
+import br.com.usemobile.baseactivity.kotlin.core.extension.empty
+import es.dmoral.toasty.Toasty
 
 import kotlinx.android.synthetic.main.toolbar.*
 
@@ -13,14 +18,37 @@ import kotlinx.android.synthetic.main.toolbar.*
  *
  * @see AppCompatActivity
  */
-abstract class BaseActivity : AppCompatActivity() {
+abstract class BaseActivity(private val childActivityName: String = String.empty()) : AppCompatActivity() {
+
+    private var doubleBackToExit: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_base)
-        setSupportActionBar(toolbar_geral)
+        setUpActv(savedInstanceState)
 
+    }
 
+    private fun setUpActv(savedInstanceState: Bundle?) {
+        when (childActivityName) {
+            activityLogin -> {
+//                setContentView(R.layout.activity_login)
+//                shouldAddFragmentToContainer = false
+            }
+            activityMenu -> {
+//                setContentView(R.layout.menu_activity)
+//                setSupportActionBar(menu_toolbar)
+//                shouldAddFragmentToContainer = false
+            }
+            else -> {
+                this.overridePendingTransition(R.anim.animation_enter, R.anim.animation_leave)
+                setContentView(R.layout.activity_base)
+                setSupportActionBar(toolbar_geral)
+                img_home?.setOnClickListener { onBackPressed() }
+            }
+        }
+
+        supportActionBar?.setDisplayShowTitleEnabled(false)
+        supportActionBar?.setDisplayHomeAsUpEnabled(false)
 
     }
 
@@ -39,4 +67,28 @@ abstract class BaseActivity : AppCompatActivity() {
             else -> super.onOptionsItemSelected(item)
         }
     }
+
+
+    override fun onBackPressed() {
+
+        this.overridePendingTransition(R.anim.animation_enterback, R.anim.animation_back)
+        when {
+            doubleBackToExit -> super.onBackPressed()
+            childActivityName != activityMenu && childActivityName != activityLogin -> super.onBackPressed()
+            else -> showMessage(getString(R.string.title_press_again_to_exit),false)
+        }
+        this.doubleBackToExit = true
+        Handler().postDelayed({ doubleBackToExit = false }, 2000)
+    }
+
+    fun showMessage(message: String, isErrorMessage: Boolean = false) {
+
+        if (isErrorMessage) {
+            Toasty.error(this, message).show()
+        } else {
+
+            Toasty.success(this, message).show()
+        }
+    }
+
 }
