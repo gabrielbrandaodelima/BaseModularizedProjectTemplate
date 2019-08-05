@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.Toolbar
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/toolbar_geral"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="top"
+        android:background="@color/colorPrimary"
+        >
+
+    <!--<ImageView-->
+            <!--android:id="@+id/img_home"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:background="?android:selectableItemBackgroundBorderless"-->
+            <!--android:contentDescription="@string/desc_img_toolbar_home"-->
+            <!--android:paddingStart="3dp"-->
+            <!--android:paddingEnd="10dp"-->
+            <!--android:paddingTop="10dp"-->
+            <!--android:paddingBottom="10dp"-->
+            <!--android:src="@drawable/v2_ic_back" />-->
+
+    <!--<TextView-->
+
+            <!--android:id="@+id/title_toolbar"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_gravity="center"-->
+            <!--android:layout_weight="7"-->
+            <!--android:ellipsize="end"-->
+            <!--android:fontFamily="@font/bebas_neue_regular"-->
+            <!--android:gravity="center"-->
+            <!--android:maxLines="1"-->
+            <!--android:textAllCaps="true"-->
+            <!--android:textColor="@android:color/white"-->
+            <!--android:textSize="20sp"-->
+            <!--tools:text="Title" />-->
+
+
+    <!--<TextView-->
+            <!--android:id="@+id/subtitle_toolbar"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_gravity="end"-->
+            <!--android:layout_marginEnd="16dp"-->
+            <!--android:background="?android:selectableItemBackgroundBorderless"-->
+            <!--android:ellipsize="end"-->
+            <!--android:fontFamily="@font/bebas_neue_regular"-->
+            <!--android:gravity="center"-->
+            <!--android:maxLines="1"-->
+            <!--android:padding="4dp"-->
+            <!--android:textAllCaps="true"-->
+            <!--android:textColor="@android:color/white"-->
+            <!--android:textSize="17sp"-->
+            <!--tools:text="LIMPAR"-->
+            <!--android:text="@string/subtitle_toolbar_clean"-->
+            <!--android:visibility="gone"/>-->
+
+</androidx.appcompat.widget.Toolbar>
