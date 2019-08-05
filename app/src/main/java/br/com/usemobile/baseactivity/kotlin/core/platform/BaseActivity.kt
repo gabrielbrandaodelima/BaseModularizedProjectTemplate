@@ -1,17 +1,23 @@
-package br.com.usemobile.baseactivity.kotlin
+package br.com.usemobile.baseactivity.kotlin.core.platform
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity;
 import android.view.Menu
 import android.view.MenuItem
+import br.com.usemobile.baseactivity.kotlin.R
 
 import kotlinx.android.synthetic.main.toolbar.*
 
-class BaseActivity : AppCompatActivity() {
+/**
+ * Base Activity class.
+ *
+ * @see AppCompatActivity
+ */
+abstract class BaseActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_base)
         setSupportActionBar(toolbar_geral)
 
 
