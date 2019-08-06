@@ -35,10 +35,8 @@ import kotlinx.android.synthetic.main.flow_step_one_fragment.*
 class FlowStepFragment : BaseFragment() {
     override fun layoutId(): Int {
 
-        val flowStepNumber = arguments?.getInt("flowStepNumber")
-
-//        val safeArgs: FlowStepFragment by navArgs()
-//        val flowStepNumber = safeArgs.flowStepNumber
+        val safeArgs: FlowStepFragmentArgs by navArgs()
+        val flowStepNumber = safeArgs.flowStepNumber
         return when (flowStepNumber) {
             2 -> R.layout.flow_step_two_fragment
             else -> R.layout.flow_step_one_fragment
