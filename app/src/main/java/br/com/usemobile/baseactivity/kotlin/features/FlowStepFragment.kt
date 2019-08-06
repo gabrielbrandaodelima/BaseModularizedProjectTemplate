@@ -21,6 +21,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.NavArgs
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
@@ -36,6 +37,8 @@ class FlowStepFragment : BaseFragment() {
 
         val flowStepNumber = arguments?.getInt("flowStepNumber")
 
+//        val safeArgs: FlowStepFragment by navArgs()
+//        val flowStepNumber = safeArgs.flowStepNumber
         return when (flowStepNumber) {
             2 -> R.layout.flow_step_two_fragment
             else -> R.layout.flow_step_one_fragment

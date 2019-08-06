@@ -10,9 +10,15 @@
     >
 
 
+        <argument
+                android:name="flowStepNumber"
+                app:argType="integer"
+                android:defaultValue="2"/>
         <action
                 android:id="@+id/next_action"
-                app:destination="@+id/flow_step_one_dest">
+                app:destination="@+id/flow_step_two_dest" app:enterAnim="@anim/nav_default_enter_anim"
+                app:exitAnim="@anim/nav_default_exit_anim" app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+                app:popExitAnim="@anim/nav_default_pop_exit_anim">
         </action>
     </fragment>
     <fragment
@@ -27,7 +33,9 @@
 
         <action
                 android:id="@+id/next_action"
-                app:destination="@+id/flow_step_two_dest">
+                app:destination="@+id/flow_step_two_dest" app:enterAnim="@anim/nav_default_enter_anim"
+                app:exitAnim="@anim/nav_default_exit_anim" app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+                app:popExitAnim="@anim/nav_default_pop_exit_anim">
         </action>
     </fragment>
 
@@ -44,7 +52,9 @@
 
         <action
                 android:id="@+id/next_action"
-                app:popUpTo="@id/mainFragment">
+                app:popUpTo="@id/mainFragment" app:popExitAnim="@anim/nav_default_pop_exit_anim"
+                app:popEnterAnim="@anim/nav_default_pop_enter_anim" app:exitAnim="@anim/nav_default_exit_anim"
+                app:enterAnim="@anim/nav_default_enter_anim">
         </action>
     </fragment>
 
