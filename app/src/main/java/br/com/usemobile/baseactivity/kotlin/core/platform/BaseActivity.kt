@@ -13,6 +13,7 @@ import androidx.navigation.NavDestination
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.NavigationUI.setupActionBarWithNavController
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
@@ -33,7 +34,7 @@ import kotlinx.android.synthetic.main.toolbar.*
  */
 abstract class BaseActivity(private val childActivityName: String = String.empty()) : AppCompatActivity() {
 
-    private lateinit var appBarConfiguration : AppBarConfiguration
+    lateinit var appBarConfiguration : AppBarConfiguration
     lateinit var navController: NavController
     lateinit var navDestination: NavDestination
     private var drawerLayout: DrawerLayout? = null
@@ -74,7 +75,6 @@ abstract class BaseActivity(private val childActivityName: String = String.empty
         supportActionBar?.setDisplayShowTitleEnabled(false)
         supportActionBar?.setDisplayHomeAsUpEnabled(false)
         setUpNavControllerAndAppbar()
-        setupActionBar(navController, appBarConfiguration)
         progressBar =
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) menu_frag_progress_bar else menu_frag_progress_bar_api21
         title_toolbar.text = toolbarTitle()
@@ -84,17 +84,10 @@ abstract class BaseActivity(private val childActivityName: String = String.empty
     private fun setUpNavControllerAndAppbar() {
         navController = Navigation.findNavController(this, navHostFragment())
         appBarConfiguration = AppBarConfiguration(navController.graph, drawerLayout)
-        navController.addOnDestinationChangedListener{controller, destination, arguments ->
+        navController.addOnDestinationChangedListener{ _, destination, _ ->
             navDestination = destination
-//            setUpStatusBar()
-//            setUpButton()
         }
 
-    }
-
-    private fun setupActionBar(navController: NavController,
-                               appBarConfig: AppBarConfiguration) {
-        setupActionBarWithNavController(navController, appBarConfig)
     }
 
     override fun onSupportNavigateUp(): Boolean {

@@ -16,21 +16,9 @@
 
 package br.com.usemobile.baseactivity.kotlin.features
 
-import android.content.res.Resources
-import android.os.Bundle
-import android.util.Log
-import android.view.Menu
-import android.view.MenuItem
-import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.Toolbar
-import androidx.navigation.NavController
-import androidx.navigation.fragment.NavHostFragment
-import androidx.navigation.ui.AppBarConfiguration
-import br.com.usemobile.baseactivity.kotlin.R
 import br.com.usemobile.baseactivity.kotlin.core.extension.activityMenu
 import br.com.usemobile.baseactivity.kotlin.core.platform.BaseActivity
-import com.google.android.material.navigation.NavigationView
+
 
 /**
  * A simple activity demonstrating use of a NavHostFragment with a navigation drawer.

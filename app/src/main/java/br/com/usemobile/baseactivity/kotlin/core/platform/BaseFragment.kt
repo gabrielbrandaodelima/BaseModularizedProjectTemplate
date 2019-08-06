@@ -56,11 +56,6 @@ abstract class BaseFragment(private val childFragmentName: String = String.empty
 
     open fun navHostFragment() : Int = R.id.base_atv_nav_host_fragment
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setUpNavControllerAndAppbar()
-    }
-
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View =
         inflater.inflate(layoutId(), container, false)
 
@@ -80,15 +75,14 @@ abstract class BaseFragment(private val childFragmentName: String = String.empty
             progressBar.gone()
     }
 
-    private fun setUpNavControllerAndAppbar() {
-        navController = activity?.let { Navigation.findNavController(it, navHostFragment()) }
-        navController?.addOnDestinationChangedListener{controller, destination, arguments ->
-            navDestination = destination
-//            setUpStatusBar()
-//            setUpButton()
-        }
-
-    }
+//    private fun setUpNavControllerAndAppbar() {
+//        navController = activity?.let { Navigation.findNavController(it, navHostFragment()) }
+//        navController?.addOnDestinationChangedListener{controller, destination, arguments ->
+//            navDestination = destination
+////            setUpStatusBar()
+////            setUpButton()
+//        }
+//    }
 
     fun handleFailure(failure: Failure?) {
         when (failure) {
