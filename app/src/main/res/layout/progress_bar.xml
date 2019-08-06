@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <merge
-    xmlns:android="http://schemas.android.com/apk/res/android">
+        xmlns:android="http://schemas.android.com/apk/res/android" xmlns:tools="http://schemas.android.com/tools">
 
     <ProgressBar
         android:id="@+id/menu_frag_progress_bar"
@@ -10,6 +10,7 @@
         android:layout_gravity="top"
         android:indeterminate="true"
         android:indeterminateTint="@color/infoColor"
+        tools:visibility="invisible"
         android:visibility="gone" />
 
     <ProgressBar
@@ -20,6 +21,7 @@
         android:layout_gravity="top"
         android:indeterminate="true"
         android:indeterminateTint="@color/infoColor"
+        tools:visibility="invisible"
         android:visibility="gone" />
 
 
