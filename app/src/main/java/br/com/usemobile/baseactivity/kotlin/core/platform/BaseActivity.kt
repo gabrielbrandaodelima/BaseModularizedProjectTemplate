@@ -28,13 +28,15 @@ import kotlinx.android.synthetic.main.progress_bar.*
 import kotlinx.android.synthetic.main.toolbar.*
 
 /**
- * Base Activity class.
- *
+ * Base Navigation Activity class,
+ * to do initial activities setups and handle navigation.
+ *@param childActivityName String for identifying activity layout template to inflate from
  * @see AppCompatActivity
+ * @see setUpActv
  */
 abstract class BaseActivity(private val childActivityName: String = String.empty()) : AppCompatActivity() {
 
-    lateinit var appBarConfiguration : AppBarConfiguration
+    lateinit var appBarConfiguration: AppBarConfiguration
     lateinit var navController: NavController
     lateinit var navDestination: NavDestination
     private var drawerLayout: DrawerLayout? = null
@@ -43,9 +45,9 @@ abstract class BaseActivity(private val childActivityName: String = String.empty
     private var doubleBackToExit: Boolean = false
     lateinit var progressBar: ProgressBar
 
-    open fun navHostFragment() : Int = R.id.base_atv_nav_host_fragment
+    open fun navHostFragment(): Int = R.id.base_atv_nav_host_fragment
 
-    abstract fun toolbarTitle() : String
+    abstract fun toolbarTitle(): String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -53,6 +55,9 @@ abstract class BaseActivity(private val childActivityName: String = String.empty
 
     }
 
+    /***
+     * Used for setting up activity layout based on constructor's [childActivityName] param.
+     */
     private fun setUpActv() {
         when (childActivityName) {
             activityLogin -> {
@@ -84,13 +89,11 @@ abstract class BaseActivity(private val childActivityName: String = String.empty
     private fun setUpNavControllerAndAppbar() {
         navController = Navigation.findNavController(this, navHostFragment())
         appBarConfiguration = AppBarConfiguration(navController.graph, drawerLayout)
-        navController.addOnDestinationChangedListener{ _, destination, _ ->
-            navDestination = destination
+        navController.addOnDestinationChangedListener { _, destination, _ ->
             onDestinationChangedListener(destination)
         }
 
     }
-    abstract fun onDestinationChangedListener(navDestination: NavDestination)
 
     /**
      * Override on activity which extends [BaseActivity],
@@ -119,6 +122,9 @@ abstract class BaseActivity(private val childActivityName: String = String.empty
         Handler().postDelayed({ doubleBackToExit = false }, 2000)
     }
 
+    /**
+     * Handle Activities double on back pressed clicks.
+     */
     private fun handleBackPressed() {
 
         when (navDestination.id) {

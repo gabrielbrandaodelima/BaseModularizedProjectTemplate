@@ -1,9 +1,13 @@
 package br.com.usemobile.baseactivity.kotlin.core.extension
 
-/** Created by Gabriel
- * on 29/04/2019
- * at 08:35
- * at Usemobile
- **/
+
+
+/***
+ * String identifier to indicate your activity_menu/activity_home layout
+ */
 const val activityMenu = "TELA PRINCIPAL"
+
+/***
+ * String identifier to indicate your activity_login layout
+ */
 const val activityLogin = "TELA LOGIN"
