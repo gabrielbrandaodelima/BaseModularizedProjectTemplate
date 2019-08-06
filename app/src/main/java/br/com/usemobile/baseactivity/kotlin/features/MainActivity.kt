@@ -16,13 +16,36 @@
 
 package br.com.usemobile.baseactivity.kotlin.features
 
+import android.os.Bundle
+import androidx.navigation.*
+import br.com.usemobile.baseactivity.kotlin.R
 import br.com.usemobile.baseactivity.kotlin.core.extension.activityMenu
 import br.com.usemobile.baseactivity.kotlin.core.platform.BaseActivity
+import kotlinx.android.synthetic.main.activity_base.*
 
 
 /**
  * A simple activity demonstrating use of a NavHostFragment with a navigation drawer.
  */
 class MainActivity : BaseActivity(activityMenu) {
+    lateinit var action: NavDirections
     override fun toolbarTitle(): String = "Main"
+
+    override fun onPostCreate(savedInstanceState: Bundle?) {
+        super.onPostCreate(savedInstanceState)
+        floatingActionButton2.setOnClickListener {
+            findNavController(navHostFragment()).navigate(action)
+        }
+    }
+
+    override fun onDestinationChangedListener(navDestination: NavDestination) {
+
+        when (navDestination.id) {
+            R.id.mainFragment -> action = MainFragmentDirections.nextAction()
+//            R.id.mainFragment -> action = MainFragmentDirections.nextActionFrag2()
+            R.id.flow_step_one_dest, R.id.flow_step_two_dest -> action = FlowStepFragmentDirections.nextAction()
+
+        }
+    }
+
 }

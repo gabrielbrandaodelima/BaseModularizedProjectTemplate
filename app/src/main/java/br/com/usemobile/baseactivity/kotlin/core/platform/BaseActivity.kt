@@ -86,9 +86,11 @@ abstract class BaseActivity(private val childActivityName: String = String.empty
         appBarConfiguration = AppBarConfiguration(navController.graph, drawerLayout)
         navController.addOnDestinationChangedListener{ _, destination, _ ->
             navDestination = destination
+            onDestinationChangedListener(destination)
         }
 
     }
+    abstract fun onDestinationChangedListener(navDestination: NavDestination)
 
     override fun onSupportNavigateUp(): Boolean {
         return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
