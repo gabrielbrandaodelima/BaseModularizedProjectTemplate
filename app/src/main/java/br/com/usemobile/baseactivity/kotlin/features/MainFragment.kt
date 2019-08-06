@@ -42,6 +42,7 @@ class MainFragment : BaseFragment(activityMenu) {
         navigate_action_button.setOnClickListener {
             Navigation.createNavigateOnClickListener(R.id.next_action, null)
         }
+        findNavController()
     }
 
 }
