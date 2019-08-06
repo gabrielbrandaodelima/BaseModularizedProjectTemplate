@@ -34,8 +34,8 @@ import kotlinx.android.synthetic.main.toolbar.*
 abstract class BaseActivity(private val childActivityName: String = String.empty()) : AppCompatActivity() {
 
     private lateinit var appBarConfiguration : AppBarConfiguration
-    private lateinit var navController: NavController
-    private lateinit var navDestination: NavDestination
+    lateinit var navController: NavController
+    lateinit var navDestination: NavDestination
     private var drawerLayout: DrawerLayout? = null
 
 
@@ -107,10 +107,20 @@ abstract class BaseActivity(private val childActivityName: String = String.empty
         when {
             doubleBackToExit -> super.onBackPressed()
             childActivityName != activityMenu && childActivityName != activityLogin -> super.onBackPressed()
-            else -> showMessage(getString(R.string.title_press_again_to_exit), false)
+            else -> handleBackPressed()
         }
-        this.doubleBackToExit = true
         Handler().postDelayed({ doubleBackToExit = false }, 2000)
+    }
+
+    private fun handleBackPressed() {
+
+        when (navDestination.id) {
+            R.id.mainFragment -> {
+                showMessage(getString(R.string.title_press_again_to_exit), false)
+                this.doubleBackToExit = true
+            }
+            else -> super.onBackPressed()
+        }
     }
 
     fun showMessage(message: String, isErrorMessage: Boolean = false) {

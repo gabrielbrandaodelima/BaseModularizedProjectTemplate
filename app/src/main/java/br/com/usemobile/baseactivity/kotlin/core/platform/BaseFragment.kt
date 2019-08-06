@@ -21,8 +21,16 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.StringRes
 import androidx.core.content.ContextCompat
+import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.NavController
+import androidx.navigation.NavDestination
+import androidx.navigation.Navigation
+import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.NavigationUI.setupActionBarWithNavController
+import androidx.navigation.ui.navigateUp
+import androidx.navigation.ui.setupActionBarWithNavController
 import br.com.usemobile.baseactivity.kotlin.R
 import br.com.usemobile.baseactivity.kotlin.core.exception.Failure
 import br.com.usemobile.baseactivity.kotlin.core.extension.activityMenu
@@ -40,12 +48,25 @@ import es.dmoral.toasty.Toasty
  */
 abstract class BaseFragment(private val childFragmentName: String = String.empty()) : Fragment() {
 
+    private var navController: NavController? = null
+    private lateinit var navDestination: NavDestination
+    private var drawerLayout: DrawerLayout? = null
+
     abstract fun layoutId(): Int
+
+    open fun navHostFragment() : Int = R.id.base_atv_nav_host_fragment
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setUpNavControllerAndAppbar()
+    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View =
         inflater.inflate(layoutId(), container, false)
 
-    open fun onBackPressed() {}
+
+    open fun onBackPressed() {
+    }
 
     internal fun firstTimeCreated(savedInstanceState: Bundle?) = savedInstanceState == null
 
@@ -57,6 +78,16 @@ abstract class BaseFragment(private val childFragmentName: String = String.empty
     internal fun hideProgressBar() = with(activity) {
         if (this is BaseActivity)
             progressBar.gone()
+    }
+
+    private fun setUpNavControllerAndAppbar() {
+        navController = activity?.let { Navigation.findNavController(it, navHostFragment()) }
+        navController?.addOnDestinationChangedListener{controller, destination, arguments ->
+            navDestination = destination
+//            setUpStatusBar()
+//            setUpButton()
+        }
+
     }
 
     fun handleFailure(failure: Failure?) {

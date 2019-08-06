@@ -23,13 +23,14 @@ import androidx.navigation.Navigation
 import androidx.navigation.fragment.NavHostFragment.findNavController
 import androidx.navigation.fragment.findNavController
 import br.com.usemobile.baseactivity.kotlin.R
+import br.com.usemobile.baseactivity.kotlin.core.extension.activityMenu
 import br.com.usemobile.baseactivity.kotlin.core.platform.BaseFragment
 import kotlinx.android.synthetic.main.home_fragment.*
 
 /**
  * Fragment used to show how to navigate to another destination
  */
-class MainFragment : BaseFragment() {
+class MainFragment : BaseFragment(activityMenu) {
     override fun layoutId() = R.layout.home_fragment
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -38,8 +39,9 @@ class MainFragment : BaseFragment() {
             findNavController().navigate(R.id.flow_step_one_dest, null)
         }
 
-//        navigate_action_button.setOnClickListener {
-//            Navigation.createNavigateOnClickListener(R.id.next_action, null)
-//        }
+        navigate_action_button.setOnClickListener {
+            Navigation.createNavigateOnClickListener(R.id.next_action, null)
+        }
     }
+
 }
