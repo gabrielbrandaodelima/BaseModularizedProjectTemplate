@@ -6,7 +6,15 @@
     <fragment android:id="@+id/mainFragment"
               android:name="br.com.usemobile.baseactivity.kotlin.features.MainFragment"
               android:label="MainFragment"
-    tools:layout="@layout/home_fragment"/>
+              tools:layout="@layout/home_fragment"
+    >
+
+
+        <action
+                android:id="@+id/next_action"
+                app:destination="@+id/flow_step_one_dest">
+        </action>
+    </fragment>
     <fragment
             android:id="@+id/flow_step_one_dest"
             android:name="br.com.usemobile.baseactivity.kotlin.features.FlowStepFragment"
