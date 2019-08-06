@@ -4,25 +4,18 @@ import android.os.Build
 import android.os.Bundle
 import android.os.Handler
 import androidx.appcompat.app.AppCompatActivity;
-import android.view.Menu
-import android.view.MenuItem
 import android.widget.ProgressBar
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.NavController
 import androidx.navigation.NavDestination
 import androidx.navigation.Navigation
-import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.NavigationUI
-import androidx.navigation.ui.NavigationUI.setupActionBarWithNavController
 import androidx.navigation.ui.navigateUp
-import androidx.navigation.ui.setupActionBarWithNavController
 import br.com.usemobile.baseactivity.kotlin.R
 import br.com.usemobile.baseactivity.kotlin.core.extension.activityLogin
 import br.com.usemobile.baseactivity.kotlin.core.extension.activityMenu
 import br.com.usemobile.baseactivity.kotlin.core.extension.empty
 import es.dmoral.toasty.Toasty
-import kotlinx.android.synthetic.main.activity_base.*
 import kotlinx.android.synthetic.main.progress_bar.*
 
 import kotlinx.android.synthetic.main.toolbar.*
@@ -38,7 +31,7 @@ abstract class BaseActivity(private val childActivityName: String = String.empty
 
     lateinit var appBarConfiguration: AppBarConfiguration
     lateinit var navController: NavController
-    lateinit var navDestination: NavDestination
+    private lateinit var navDestination: NavDestination
     private var drawerLayout: DrawerLayout? = null
 
 
@@ -89,8 +82,8 @@ abstract class BaseActivity(private val childActivityName: String = String.empty
     private fun setUpNavControllerAndAppbar() {
         navController = Navigation.findNavController(this, navHostFragment())
         appBarConfiguration = AppBarConfiguration(navController.graph, drawerLayout)
-        navController.addOnDestinationChangedListener { _, destination, _ ->
-            onDestinationChangedListener(destination)
+        navController.addOnDestinationChangedListener { controller, destination, bundle ->
+            onDestinationChangedListener(controller, destination, bundle)
         }
 
     }
@@ -99,7 +92,11 @@ abstract class BaseActivity(private val childActivityName: String = String.empty
      * Override on activity which extends [BaseActivity],
      * to handle nav controller destination changed
      */
-    open fun onDestinationChangedListener(destination: NavDestination) {
+    open fun onDestinationChangedListener(
+        controller: NavController,
+        destination: NavDestination,
+        bundle: Bundle?
+    ) {
         navDestination = destination
     }
 

@@ -38,9 +38,9 @@ class MainActivity : BaseActivity(activityMenu) {
         }
     }
 
-    override fun onDestinationChangedListener(navDestination: NavDestination) {
+    override fun onDestinationChangedListener(controller: NavController, destination: NavDestination, bundle: Bundle?) {
 
-        when (navDestination.id) {
+        when (destination.id) {
             R.id.mainFragment -> action = MainFragmentDirections.nextAction()
 //            R.id.mainFragment -> action = MainFragmentDirections.nextActionFrag2()
             R.id.flow_step_one_dest, R.id.flow_step_two_dest -> action = FlowStepFragmentDirections.nextAction()
