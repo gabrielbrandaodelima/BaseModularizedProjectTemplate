@@ -35,13 +35,12 @@ class MainFragment : BaseFragment(activityMenu) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        navigate_destination_button.setOnClickListener {
-            findNavController().navigate(R.id.flow_step_one_dest)
-        }
+        navigate_destination_button.setOnClickListener (Navigation.createNavigateOnClickListener(R.id.next_action))
 
-        navigate_action_button.setOnClickListener {
-            findNavController().navigate(R.id.flow_step_two_dest)
-        }
+        navigate_action_button.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.next_action_frag2))
+//            findNavController().navigate(R.id.flow_step_two_dest)
+
+
     }
 
 }
