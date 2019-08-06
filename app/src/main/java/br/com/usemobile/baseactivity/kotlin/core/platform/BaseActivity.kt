@@ -92,6 +92,18 @@ abstract class BaseActivity(private val childActivityName: String = String.empty
     }
     abstract fun onDestinationChangedListener(navDestination: NavDestination)
 
+    /**
+     * Override on activity which extends [BaseActivity],
+     * to handle nav controller destination changed
+     */
+    open fun onDestinationChangedListener(destination: NavDestination) {
+        navDestination = destination
+    }
+
+    /**
+     * Needed only when you have settled up action bar using setupActionBarWithNavController,
+     * in order to handle Action Bar navigation.
+     */
     override fun onSupportNavigateUp(): Boolean {
         return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
     }
