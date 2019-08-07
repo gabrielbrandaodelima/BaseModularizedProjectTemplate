@@ -16,6 +16,7 @@
 
 package br.com.usemobile.baseactivity.kotlin.features
 
+import br.com.usemobile.baseactivity.kotlin.R
 import br.com.usemobile.baseactivity.kotlin.core.extension.activityMenu
 import br.com.usemobile.baseactivity.kotlin.core.platform.BaseActivity
 
@@ -24,6 +25,8 @@ import br.com.usemobile.baseactivity.kotlin.core.platform.BaseActivity
  * A simple activity demonstrating use of a NavHostFragment with a navigation drawer.
  */
 class MainActivity : BaseActivity(activityMenu) {
+    override fun navGraphStartDestination(): Int  = R.id.home_fragment_dest
+
     override fun toolbarTitle(): String = "Main"
 
 }

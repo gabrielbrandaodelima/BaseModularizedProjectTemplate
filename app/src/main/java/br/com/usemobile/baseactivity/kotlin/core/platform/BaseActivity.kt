@@ -37,7 +37,7 @@ abstract class BaseActivity(private val childActivityName: String = String.empty
 
     lateinit var appBarConfiguration: AppBarConfiguration
     lateinit var navController: NavController
-    private lateinit var navDestination: NavDestination
+    lateinit var navDestination: NavDestination
     private var drawerLayout: DrawerLayout? = null
 
 
@@ -45,6 +45,14 @@ abstract class BaseActivity(private val childActivityName: String = String.empty
     lateinit var progressBar: ProgressBar
 
     open fun navHostFragment(): Int = R.id.base_atv_nav_host_fragment
+
+    /**
+     * - Resource *id* identifier of your main nav graph start destination, for handling onBackPressed behavior
+     *  > Ex:
+     *
+     *   >*R.id.home_fragment_dest*
+     */
+    abstract fun navGraphStartDestination(): Int
 
     abstract fun toolbarTitle(): String
 
@@ -134,7 +142,7 @@ abstract class BaseActivity(private val childActivityName: String = String.empty
     private fun handleBackPressed() {
 
         when (navDestination.id) {
-            R.id.mainFragment -> {
+            navGraphStartDestination() -> {
                 showMessage(getString(R.string.title_press_again_to_exit), false)
                 this.doubleBackToExit = true
             }

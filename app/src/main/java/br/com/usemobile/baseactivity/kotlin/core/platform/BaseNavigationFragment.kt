@@ -53,7 +53,6 @@ abstract class BaseNavigationFragment(private val childFragmentName: String = St
     BaseFragment(childFragmentName) {
 
     abstract fun navController(): NavController?
-    private lateinit var navDestination: NavDestination
     private var drawerLayout: DrawerLayout? = null
 
     abstract fun navHostFragment(): Int
@@ -68,6 +67,11 @@ abstract class BaseNavigationFragment(private val childFragmentName: String = St
      */
     private fun setUpNavController() {
         navController()?.addOnDestinationChangedListener { controller, destination, arguments ->
+            activity?.let {
+                when (it) {
+                    is BaseActivity -> it.navDestination = destination
+                }
+            }
             onDestinationChangedListener(controller, destination, arguments)
         }
     }

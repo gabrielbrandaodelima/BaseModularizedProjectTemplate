@@ -47,10 +47,10 @@ class MainFragment : BaseNavigationFragment(activityMenu) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        flowViewModel = ViewModelProviders.of(this).get(FlowViewModel::class.java)
+        flowViewModel = activity?.let { ViewModelProviders.of(it).get(FlowViewModel::class.java) }
 
         floatingActionButton2.setOnClickListener{
-            navigateToDestinationRes(navController(), R.id.flow_step_two_dest)
+            navigateWithActionToRes(navController(), action)
         }
 
 //        setViewNavController(floatingActionButton2)
