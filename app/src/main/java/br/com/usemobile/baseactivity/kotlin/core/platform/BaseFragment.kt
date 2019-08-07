@@ -59,6 +59,10 @@ abstract class BaseFragment(private val childFragmentName: String = String.empty
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View =
         inflater.inflate(layoutId(), container, false)
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        setUpNavController()
+    }
 
     open fun onBackPressed() {
     }
@@ -75,14 +79,23 @@ abstract class BaseFragment(private val childFragmentName: String = String.empty
             progressBar.gone()
     }
 
-//    private fun setUpNavControllerAndAppbar() {
-//        navController = activity?.let { Navigation.findNavController(it, navHostFragment()) }
-//        navController?.addOnDestinationChangedListener{controller, destination, arguments ->
-//            navDestination = destination
-////            setUpStatusBar()
-////            setUpButton()
-//        }
-//    }
+    private fun setUpNavController() {
+        navController = activity?.let { Navigation.findNavController(it, navHostFragment()) }
+        navController?.addOnDestinationChangedListener{controller, destination, arguments ->
+            onDestinationChangedListener(controller, destination, arguments)
+        }
+    }
+    /**
+     * Override on activity which extends [BaseActivity],
+     * to handle nav controller destination changed
+     */
+    open fun onDestinationChangedListener(
+        controller: NavController,
+        destination: NavDestination,
+        arguments: Bundle?
+    ) {
+        navDestination = destination
+    }
 
     fun handleFailure(failure: Failure?) {
         when (failure) {

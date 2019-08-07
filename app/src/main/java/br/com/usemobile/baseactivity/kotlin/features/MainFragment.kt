@@ -19,6 +19,9 @@ package br.com.usemobile.baseactivity.kotlin.features
 import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
+import androidx.navigation.NavController
+import androidx.navigation.NavDestination
+import androidx.navigation.NavDirections
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.NavHostFragment.findNavController
 import androidx.navigation.fragment.findNavController
@@ -33,14 +36,25 @@ import kotlinx.android.synthetic.main.home_fragment.*
 class MainFragment : BaseFragment(activityMenu) {
     override fun layoutId() = R.layout.home_fragment
 
+    lateinit var action: NavDirections
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         navigate_destination_button.setOnClickListener (Navigation.createNavigateOnClickListener(R.id.next_action))
 
         navigate_action_button.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.next_action_frag2))
-//            findNavController().navigate(R.id.flow_step_two_dest)
+            findNavController(this).navigate(action)
 
 
     }
 
+    override fun onDestinationChangedListener(controller: NavController, destination: NavDestination, bundle: Bundle?) {
+
+        when (destination.id) {
+            R.id.mainFragment -> action = MainFragmentDirections.nextAction()
+//            R.id.mainFragment -> action = MainFragmentDirections.nextActionFrag2()
+            R.id.flow_step_one_dest, R.id.flow_step_two_dest -> action = FlowStepFragmentDirections.nextAction()
+
+        }
+    }
 }

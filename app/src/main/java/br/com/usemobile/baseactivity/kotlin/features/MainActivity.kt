@@ -34,18 +34,18 @@ class MainActivity : BaseActivity(activityMenu) {
     override fun onPostCreate(savedInstanceState: Bundle?) {
         super.onPostCreate(savedInstanceState)
         floatingActionButton2.setOnClickListener {
-            findNavController(navHostFragment()).navigate(action)
+//            findNavController(navHostFragment()).navigate(action)
         }
     }
 
-    override fun onDestinationChangedListener(controller: NavController, destination: NavDestination, bundle: Bundle?) {
-
-        when (destination.id) {
-            R.id.mainFragment -> action = MainFragmentDirections.nextAction()
-//            R.id.mainFragment -> action = MainFragmentDirections.nextActionFrag2()
-            R.id.flow_step_one_dest, R.id.flow_step_two_dest -> action = FlowStepFragmentDirections.nextAction()
-
-        }
-    }
+//    override fun onDestinationChangedListener(controller: NavController, destination: NavDestination, bundle: Bundle?) {
+//
+//        when (destination.id) {
+//            R.id.mainFragment -> action = MainFragmentDirections.nextAction()
+////            R.id.mainFragment -> action = MainFragmentDirections.nextActionFrag2()
+//            R.id.flow_step_one_dest, R.id.flow_step_two_dest -> action = FlowStepFragmentDirections.nextAction()
+//
+//        }
+//    }
 
 }

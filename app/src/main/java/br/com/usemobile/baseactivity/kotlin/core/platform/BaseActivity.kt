@@ -81,7 +81,7 @@ abstract class BaseActivity(private val childActivityName: String = String.empty
 
     private fun setUpNavControllerAndAppbar() {
         navController = Navigation.findNavController(this, navHostFragment())
-        appBarConfiguration = AppBarConfiguration(navController.graph, drawerLayout)
+//        appBarConfiguration = AppBarConfiguration(navController.graph, drawerLayout)
         navController.addOnDestinationChangedListener { controller, destination, bundle ->
             onDestinationChangedListener(controller, destination, bundle)
         }
@@ -101,7 +101,7 @@ abstract class BaseActivity(private val childActivityName: String = String.empty
     }
 
     /**
-     * Needed only when you have settled up action bar using setupActionBarWithNavController,
+     * Needed only when you have settled up action bar using native action bar settinggs,
      * in order to handle Action Bar navigation.
      */
     override fun onSupportNavigateUp(): Boolean {
