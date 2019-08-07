@@ -128,7 +128,10 @@ abstract class BaseFragment(private val childFragmentName: String = String.empty
 
     /**
      * - Creates a click listener to resource Id using Navigation arch components
-     * @param id Resource Identifier to navigate to; ex. R.id.destination or R.id.action
+     * @param id Resource Identifier to navigate to.
+     *
+     * - Ex.
+     * > *R.id.destination* or *R.id.action*
      * @return Click listener of type Navigation.createNavigateOnClickListener
      */
     fun createNavigateToIdResClickListener(@IdRes id: Int): View.OnClickListener {

@@ -201,7 +201,7 @@ abstract class BaseActivity(private val childActivityName: String = String.empty
      * @param view View to attach navController to.
      *
      * - Example:
-     *  >  setViewNavController(*floatingActionButton2*)
+     *  > setViewNavController(*floatingActionButton2*)
      *  > floatingActionButton2.setOnClickListener(*createNavigateToIdResClickListener(R.id.flow_step_two_dest)*)
      */
     fun setViewNavController(view: View) {
