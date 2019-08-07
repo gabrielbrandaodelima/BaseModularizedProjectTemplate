@@ -83,7 +83,7 @@ abstract class BaseFragment(private val childFragmentName: String = String.empty
     }
 
     /**
-     * Set up Fragment's Navigation Controller and it's destination changed listener
+     * - Set up Fragment's Navigation Controller and it's destination changed listener
      */
     private fun setUpNavController() {
         navController = activity?.let { Navigation.findNavController(it, navHostFragment()) }
@@ -92,7 +92,7 @@ abstract class BaseFragment(private val childFragmentName: String = String.empty
         }
     }
     /**
-     * Override on activity which extends [BaseActivity],
+     * - Override on activity which extends [BaseActivity],
      * to handle nav controller destination changed
      */
     open fun onDestinationChangedListener(
@@ -105,24 +105,29 @@ abstract class BaseFragment(private val childFragmentName: String = String.empty
 
     /**
      *
-     * Used to navigate to destination Id handling the Navigation Controller
-     * @param id Resource Identifier to navigate to; ex. R.id.destination or R.id.action
+     * - Used to navigate to destination Id handling the Navigation Controller
+     * @param id Resource Identifier to navigate to.
+     *
+     * - Ex.
+     * > *R.id.destination* or *R.id.action*
      *
      */
     fun navigateToDestinationRes(@IdRes id: Int) {
         findNavController().navigate(id)
     }
     /**
-     * Used to navigate to destination with action handling the Navigation Controller
+     * - Used to navigate to destination with action handling the Navigation Controller
      * @param directions NavDirections action to navigate to.
-     * Example: MainFragmentDirections.nextAction()
+     *
+     * - Example:
+     * > *MainFragmentDirections.nextAction()*
      */
     fun navigateWithActionToRes(directions: NavDirections) {
         findNavController().navigate(directions)
     }
 
     /**
-     * Creates a click listener to resource Id using Navigation arch components
+     * - Creates a click listener to resource Id using Navigation arch components
      * @param id Resource Identifier to navigate to; ex. R.id.destination or R.id.action
      * @return Click listener of type Navigation.createNavigateOnClickListener
      */
@@ -131,7 +136,7 @@ abstract class BaseFragment(private val childFragmentName: String = String.empty
     }
 
     /**
-     * Method for handling viewModel's endpoints call failures.
+     * - Method for handling viewModel's endpoints call failures.
      *
      * @param failure Failure of type [Failure]
      */
@@ -155,23 +160,24 @@ abstract class BaseFragment(private val childFragmentName: String = String.empty
     }
 
     /**
-     * Method for handling feature's specific failures.
-     *Override this for specific cases.
+     * - Method for handling feature's specific failures.
+     *
+     * > *Override this for specific cases.*
      */
     open fun handleFeatureFailure() {
         showMessage("BaseFragment handleFeatureFailure", true)
 
     }
 
-    /***
-     * Notify using Snackbar
+    /**
+     * * Notify using Snackbar
      * @param message String msg
      */
     fun notify(@StringRes message: String) =
         view?.let { Snackbar.make(it, message, Snackbar.LENGTH_SHORT).show() }
 
     /**
-     * Display a Toasty message
+     * - Display a Toasty message
      * @param message String msg
      * @param isErrorMessage Set to true if is an error
      */

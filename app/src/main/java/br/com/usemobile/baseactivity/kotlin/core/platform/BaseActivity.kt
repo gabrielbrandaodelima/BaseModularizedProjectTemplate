@@ -6,11 +6,11 @@ import android.os.Handler
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity;
 import android.widget.ProgressBar
+import androidx.annotation.IdRes
 import androidx.annotation.StringRes
 import androidx.drawerlayout.widget.DrawerLayout
-import androidx.navigation.NavController
-import androidx.navigation.NavDestination
-import androidx.navigation.Navigation
+import androidx.navigation.*
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import br.com.usemobile.baseactivity.kotlin.R
@@ -52,8 +52,8 @@ abstract class BaseActivity(private val childActivityName: String = String.empty
 
     }
 
-    /***
-     * Used for setting up activity layout based on constructor's [childActivityName] param.
+    /**
+     * - Used for setting up activity layout based on constructor's [childActivityName] param.
      */
     private fun setUpActv() {
         when (childActivityName) {
@@ -84,7 +84,7 @@ abstract class BaseActivity(private val childActivityName: String = String.empty
     }
 
     /**
-     * Set up Activity's Navigation Controller and it's destination changed listener
+     * - Set up Activity's Navigation Controller and it's destination changed listener
      */
     private fun setUpNavControllerAndAppbar() {
         navController = Navigation.findNavController(this, navHostFragment())
@@ -96,7 +96,7 @@ abstract class BaseActivity(private val childActivityName: String = String.empty
     }
 
     /**
-     * Override on activity which extends [BaseActivity],
+     * - Override on activity which extends [BaseActivity],
      * to handle nav controller destination changed
      */
     open fun onDestinationChangedListener(
@@ -108,7 +108,7 @@ abstract class BaseActivity(private val childActivityName: String = String.empty
     }
 
     /**
-     * Needed only when you have settled up action bar using native action bar settinggs,
+     * - Needed only when you have settled up action bar using native action bar settings,
      * in order to handle Action Bar navigation.
      */
     override fun onSupportNavigateUp(): Boolean {
@@ -127,7 +127,7 @@ abstract class BaseActivity(private val childActivityName: String = String.empty
     }
 
     /**
-     * Handle Activities double on back pressed clicks.
+     * - Handle Activities double on back pressed clicks.
      */
     private fun handleBackPressed() {
 
@@ -140,15 +140,15 @@ abstract class BaseActivity(private val childActivityName: String = String.empty
         }
     }
 
-    /***
-     * Notify using Snackbar
+    /**
+     * - Notify using Snackbar
      * @param message String msg
      */
     fun notify(@StringRes message: String) =
         Snackbar.make(actv_view, message, Snackbar.LENGTH_SHORT).show()
 
     /**
-     * Display a Toasty message
+     * - Display a Toasty message
      * @param message String msg
      * @param isErrorMessage set to true if is an error
      */
@@ -162,4 +162,49 @@ abstract class BaseActivity(private val childActivityName: String = String.empty
         }
     }
 
+    /**
+     *
+     * - Used to navigate to destination Id handling the Navigation Controller
+     * @param id Resource Identifier to navigate to
+     * > Ex. *R.id.destination* or *R.id.action*
+     *
+     */
+    fun navigateToDestinationRes(@IdRes id: Int) {
+        findNavController(navHostFragment()).navigate(id)
+    }
+
+    /**
+     * - Used to navigate to destination with action handling the Navigation Controller
+     * @param directions NavDirections action to navigate to.
+     * - Example:
+     * > *MainFragmentDirections.nextAction()*
+     */
+    fun navigateWithActionToRes(directions: NavDirections) {
+        findNavController(navHostFragment()).navigate(directions)
+    }
+
+    /**
+     * - Creates a click listener to resource Id using Navigation arch components
+     * @param id Resource Identifier to navigate to.
+     * - Ex.
+     *
+     * >*R.id.destination* or *R.id.action*
+     * @return Click listener of type [Navigation.createNavigateOnClickListener]
+     * @throws java.lang.IllegalStateException When view does not have a NavController set
+     */
+    fun createNavigateToIdResClickListener(@IdRes id: Int): View.OnClickListener {
+        return Navigation.createNavigateOnClickListener(id)
+    }
+
+    /**
+     * - Sets the Navigation Controller to specified view for later use of [createNavigateToIdResClickListener].
+     * @param view View to attach navController to.
+     *
+     * - Example:
+     *  >  setViewNavController(*floatingActionButton2*)
+     *  > floatingActionButton2.setOnClickListener(*createNavigateToIdResClickListener(R.id.flow_step_two_dest)*)
+     */
+    fun setViewNavController(view: View) {
+        Navigation.setViewNavController(view, navController)
+    }
 }

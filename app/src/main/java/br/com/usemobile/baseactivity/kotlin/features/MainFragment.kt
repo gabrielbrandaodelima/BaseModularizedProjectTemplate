@@ -43,7 +43,7 @@ class MainFragment : BaseFragment(activityMenu) {
         navigate_destination_button.setOnClickListener(createNavigateToIdResClickListener(R.id.flow_step_two_dest))
 
         navigate_action_button.setOnClickListener {
-            notify("test")
+//            notify("test")
             navigateWithActionToRes(action)
         }
 

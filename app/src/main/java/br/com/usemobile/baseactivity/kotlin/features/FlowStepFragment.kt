@@ -46,11 +46,11 @@ class FlowStepFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-//        next_button.setOnClickListener {
-//            findNavController().navigate(R.id.mainFragment)
-//        }
-        next_button.setOnClickListener(
-            Navigation.createNavigateOnClickListener(R.id.next_action)
-        )
+        next_button.setOnClickListener {
+            navigateToDestinationRes(R.id.mainFragment)
+        }
+//        next_button.setOnClickListener(
+//            createNavigateToIdResClickListener(R.id.next_action)
+//        )
     }
 }

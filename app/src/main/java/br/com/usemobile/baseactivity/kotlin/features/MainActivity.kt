@@ -34,21 +34,22 @@ class MainActivity : BaseActivity(activityMenu) {
 
     override fun onPostCreate(savedInstanceState: Bundle?) {
         super.onPostCreate(savedInstanceState)
-        floatingActionButton2.setOnClickListener {
-            //            findNavController(navHostFragment()).navigate(action)
-
-            notify("test")
-        }
+//        floatingActionButton2.setOnClickListener {
+//            navigateWithActionToRes(action)
+//            notify("test")
+//        }
+        setViewNavController(floatingActionButton2)
+        floatingActionButton2.setOnClickListener(createNavigateToIdResClickListener(R.id.next_action))
     }
 
-//    override fun onDestinationChangedListener(controller: NavController, destination: NavDestination, bundle: Bundle?) {
-//
-//        when (destination.id) {
-//            R.id.mainFragment -> action = MainFragmentDirections.nextAction()
-////            R.id.mainFragment -> action = MainFragmentDirections.nextActionFrag2()
-//            R.id.flow_step_one_dest, R.id.flow_step_two_dest -> action = FlowStepFragmentDirections.nextAction()
-//
-//        }
-//    }
+    override fun onDestinationChangedListener(controller: NavController, destination: NavDestination, bundle: Bundle?) {
+        super.onDestinationChangedListener(controller, destination, bundle)
+        when (destination.id) {
+            R.id.mainFragment -> action = MainFragmentDirections.nextAction()
+//            R.id.mainFragment -> action = MainFragmentDirections.nextActionFrag2()
+            R.id.flow_step_one_dest, R.id.flow_step_two_dest -> action = FlowStepFragmentDirections.nextAction()
+
+        }
+    }
 
 }
