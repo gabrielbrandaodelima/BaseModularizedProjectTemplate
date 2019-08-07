@@ -47,7 +47,7 @@ class FlowStepFragment : BaseFragment() {
         super.onViewCreated(view, savedInstanceState)
 
         next_button.setOnClickListener {
-            navigateToDestinationRes(R.id.mainFragment)
+            navigateToDestinationRes(R.id.next_action)
         }
 //        next_button.setOnClickListener(
 //            createNavigateToIdResClickListener(R.id.next_action)

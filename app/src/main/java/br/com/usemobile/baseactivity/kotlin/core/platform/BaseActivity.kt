@@ -119,7 +119,7 @@ abstract class BaseActivity(private val childActivityName: String = String.empty
 
         this.overridePendingTransition(R.anim.animation_enterback, R.anim.animation_back)
         when {
-            doubleBackToExit -> super.onBackPressed()
+            doubleBackToExit -> finish()
             childActivityName != activityMenu && childActivityName != activityLogin -> super.onBackPressed()
             else -> handleBackPressed()
         }
