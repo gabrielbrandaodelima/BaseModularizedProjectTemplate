@@ -23,21 +23,18 @@ import androidx.navigation.NavController
 import androidx.navigation.NavDestination
 import androidx.navigation.NavDirections
 import androidx.navigation.Navigation
-import androidx.navigation.Navigation.setViewNavController
 import androidx.navigation.fragment.NavHostFragment.findNavController
 import androidx.navigation.fragment.findNavController
 import br.com.usemobile.baseactivity.kotlin.R
 import br.com.usemobile.baseactivity.kotlin.core.extension.activityMenu
 import br.com.usemobile.baseactivity.kotlin.core.platform.BaseFragment
 import kotlinx.android.synthetic.main.home_fragment.*
-import kotlinx.android.synthetic.main.main_fragment.*
 
 /**
  * Fragment used to show how to navigate to another destination
  */
-class MainFragment : BaseFragment(activityMenu) {
-    override fun layoutId() = R.layout.main_fragment
-    override fun navHostFragment(): Int = R.id.main_frag_nav_host_fragment
+class HomeFragment : BaseFragment() {
+    override fun layoutId() = R.layout.home_fragment
 
     lateinit var action: NavDirections
 
@@ -45,12 +42,13 @@ class MainFragment : BaseFragment(activityMenu) {
         super.onViewCreated(view, savedInstanceState)
 
 
-        floatingActionButton2.setOnClickListener{
+
+        navigate_destination_button.setOnClickListener(createNavigateToIdResClickListener(R.id.flow_step_two_dest))
+
+        navigate_action_button.setOnClickListener {
+            //            notify("test")
             navigateWithActionToRes(action)
         }
-
-
-
 
     }
 

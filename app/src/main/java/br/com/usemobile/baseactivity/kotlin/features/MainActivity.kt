@@ -29,27 +29,6 @@ import kotlinx.android.synthetic.main.activity_base.*
  * A simple activity demonstrating use of a NavHostFragment with a navigation drawer.
  */
 class MainActivity : BaseActivity(activityMenu) {
-    lateinit var action: NavDirections
     override fun toolbarTitle(): String = "Main"
-
-    override fun onPostCreate(savedInstanceState: Bundle?) {
-        super.onPostCreate(savedInstanceState)
-//        floatingActionButton2.setOnClickListener {
-//            navigateWithActionToRes(action)
-//            notify("test")
-//        }
-        setViewNavController(floatingActionButton2)
-        floatingActionButton2.setOnClickListener(createNavigateToIdResClickListener(R.id.next_action))
-    }
-
-    override fun onDestinationChangedListener(controller: NavController, destination: NavDestination, bundle: Bundle?) {
-        super.onDestinationChangedListener(controller, destination, bundle)
-        when (destination.id) {
-            R.id.mainFragment -> action = MainFragmentDirections.nextAction()
-//            R.id.mainFragment -> action = MainFragmentDirections.nextActionFrag2()
-            R.id.flow_step_one_dest, R.id.flow_step_two_dest -> action = FlowStepFragmentDirections.nextAction()
-
-        }
-    }
 
 }
