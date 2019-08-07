@@ -16,13 +16,8 @@
 
 package br.com.usemobile.baseactivity.kotlin.features
 
-import android.os.Bundle
-import android.view.View
-import androidx.navigation.*
-import br.com.usemobile.baseactivity.kotlin.R
 import br.com.usemobile.baseactivity.kotlin.core.extension.activityMenu
 import br.com.usemobile.baseactivity.kotlin.core.platform.BaseActivity
-import kotlinx.android.synthetic.main.activity_base.*
 
 
 /**

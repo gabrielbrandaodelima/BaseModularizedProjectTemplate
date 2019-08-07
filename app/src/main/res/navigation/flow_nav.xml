@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:id="@+id/flow_nav"
+            app:startDestination="@id/home_fragment_dest">
+
+    <fragment android:id="@+id/home_fragment_dest" android:name="br.com.usemobile.baseactivity.kotlin.features.HomeFragment"
+              android:label="HomeFragment"
+              tools:layout="@layout/home_fragment">
+
+        <action
+                android:id="@+id/next_action_frag2"
+                app:destination="@+id/flow_step_two_dest" app:enterAnim="@anim/nav_default_enter_anim"
+                app:exitAnim="@anim/nav_default_exit_anim" app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+                app:popExitAnim="@anim/nav_default_pop_exit_anim"/>
+        <action
+                android:id="@+id/next_action"
+                app:destination="@+id/flow_step_one_dest" app:enterAnim="@anim/nav_default_enter_anim"
+                app:exitAnim="@anim/nav_default_exit_anim" app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+                app:popExitAnim="@anim/nav_default_pop_exit_anim">
+        </action>
+
+
+    </fragment>
+
+    <fragment
+            android:id="@+id/flow_step_one_dest"
+            android:name="br.com.usemobile.baseactivity.kotlin.features.FlowStepFragment"
+            tools:layout="@layout/flow_step_one_fragment"
+    >
+        <argument
+                android:name="flowStepNumber"
+                app:argType="integer"
+                android:defaultValue="1"/>
+
+        <action
+                android:id="@+id/next_action"
+                app:destination="@+id/flow_step_two_dest" app:enterAnim="@anim/nav_default_enter_anim"
+                app:exitAnim="@anim/nav_default_exit_anim" app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+                app:popExitAnim="@anim/nav_default_pop_exit_anim">
+        </action>
+
+    </fragment>
+
+    <fragment
+            android:id="@+id/flow_step_two_dest"
+            android:name="br.com.usemobile.baseactivity.kotlin.features.FlowStepFragment"
+            tools:layout="@layout/flow_step_two_fragment"
+    >
+
+        <argument
+                android:name="flowStepNumber"
+                app:argType="integer"
+                android:defaultValue="2"/>
+
+        <action
+                android:id="@+id/next_action"
+                app:popUpTo="@id/home_fragment_dest" app:popExitAnim="@anim/nav_default_pop_exit_anim"
+                app:popEnterAnim="@anim/nav_default_pop_enter_anim" app:exitAnim="@anim/nav_default_exit_anim"
+                app:enterAnim="@anim/nav_default_enter_anim">
+        </action>
+
+    </fragment>
+
+</navigation>

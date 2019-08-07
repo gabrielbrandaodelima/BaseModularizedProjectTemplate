@@ -17,19 +17,15 @@
 package br.com.usemobile.baseactivity.kotlin.features
 
 import android.os.Bundle
-import android.view.*
-import androidx.fragment.app.Fragment
+import android.view.View
 import androidx.navigation.NavController
 import androidx.navigation.NavDestination
 import androidx.navigation.NavDirections
 import androidx.navigation.Navigation
-import androidx.navigation.Navigation.setViewNavController
-import androidx.navigation.fragment.NavHostFragment.findNavController
 import androidx.navigation.fragment.findNavController
 import br.com.usemobile.baseactivity.kotlin.R
 import br.com.usemobile.baseactivity.kotlin.core.extension.activityMenu
 import br.com.usemobile.baseactivity.kotlin.core.platform.BaseFragment
-import kotlinx.android.synthetic.main.home_fragment.*
 import kotlinx.android.synthetic.main.main_fragment.*
 
 /**
@@ -39,14 +35,13 @@ class MainFragment : BaseFragment(activityMenu) {
     override fun layoutId() = R.layout.main_fragment
     override fun navHostFragment(): Int = R.id.main_frag_nav_host_fragment
 
-    lateinit var action: NavDirections
+    var action: NavDirections = HomeFragmentDirections.nextAction()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-
         floatingActionButton2.setOnClickListener{
-            navigateWithActionToRes(action)
+            navigateToDestinationRes(R.id.flow_step_two_dest)
         }
 
 
@@ -57,7 +52,7 @@ class MainFragment : BaseFragment(activityMenu) {
     override fun onDestinationChangedListener(controller: NavController, destination: NavDestination, bundle: Bundle?) {
 
         when (destination.id) {
-            R.id.mainFragment -> action = MainFragmentDirections.nextAction()
+            R.id.home_fragment_dest -> action = HomeFragmentDirections.nextAction()
 //            R.id.mainFragment -> action = MainFragmentDirections.nextActionFrag2()
             R.id.flow_step_one_dest, R.id.flow_step_two_dest -> action = FlowStepFragmentDirections.nextAction()
 

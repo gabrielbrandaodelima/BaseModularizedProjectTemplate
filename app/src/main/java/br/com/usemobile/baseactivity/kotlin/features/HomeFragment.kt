@@ -17,16 +17,11 @@
 package br.com.usemobile.baseactivity.kotlin.features
 
 import android.os.Bundle
-import android.view.*
-import androidx.fragment.app.Fragment
+import android.view.View
 import androidx.navigation.NavController
 import androidx.navigation.NavDestination
 import androidx.navigation.NavDirections
-import androidx.navigation.Navigation
-import androidx.navigation.fragment.NavHostFragment.findNavController
-import androidx.navigation.fragment.findNavController
 import br.com.usemobile.baseactivity.kotlin.R
-import br.com.usemobile.baseactivity.kotlin.core.extension.activityMenu
 import br.com.usemobile.baseactivity.kotlin.core.platform.BaseFragment
 import kotlinx.android.synthetic.main.home_fragment.*
 
@@ -36,29 +31,19 @@ import kotlinx.android.synthetic.main.home_fragment.*
 class HomeFragment : BaseFragment() {
     override fun layoutId() = R.layout.home_fragment
 
-    lateinit var action: NavDirections
+//    var action: NavDirections =
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
 
 
-        navigate_destination_button.setOnClickListener(createNavigateToIdResClickListener(R.id.flow_step_two_dest))
+        navigate_destination_button.setOnClickListener(createNavigateToIdResClickListener(R.id.next_action))
 
         navigate_action_button.setOnClickListener {
-            //            notify("test")
-            navigateWithActionToRes(action)
+//                        notify("test")
+            navigateToDestinationRes(R.id.flow_step_one_dest)
         }
 
-    }
-
-    override fun onDestinationChangedListener(controller: NavController, destination: NavDestination, bundle: Bundle?) {
-
-        when (destination.id) {
-            R.id.mainFragment -> action = MainFragmentDirections.nextAction()
-//            R.id.mainFragment -> action = MainFragmentDirections.nextActionFrag2()
-            R.id.flow_step_one_dest, R.id.flow_step_two_dest -> action = FlowStepFragmentDirections.nextAction()
-
-        }
     }
 }

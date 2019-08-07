@@ -57,7 +57,7 @@ abstract class BaseFragment(private val childFragmentName: String = String.empty
 
     abstract fun layoutId(): Int
 
-    open fun navHostFragment() : Int = R.id.base_atv_nav_host_fragment
+    open fun navHostFragment(): Int = R.id.base_atv_nav_host_fragment
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View =
         inflater.inflate(layoutId(), container, false)
@@ -86,11 +86,12 @@ abstract class BaseFragment(private val childFragmentName: String = String.empty
      * - Set up Fragment's Navigation Controller and it's destination changed listener
      */
     private fun setUpNavController() {
-        navController = activity?.let { Navigation.findNavController(it, navHostFragment()) }
-        navController?.addOnDestinationChangedListener{controller, destination, arguments ->
+        navController = findNavController()
+        navController?.addOnDestinationChangedListener { controller, destination, arguments ->
             onDestinationChangedListener(controller, destination, arguments)
         }
     }
+
     /**
      * - Override on activity which extends [BaseActivity],
      * to handle nav controller destination changed
@@ -100,7 +101,6 @@ abstract class BaseFragment(private val childFragmentName: String = String.empty
         destination: NavDestination,
         arguments: Bundle?
     ) {
-        navDestination = destination
     }
 
     /**
@@ -115,6 +115,7 @@ abstract class BaseFragment(private val childFragmentName: String = String.empty
     fun navigateToDestinationRes(@IdRes id: Int) {
         findNavController().navigate(id)
     }
+
     /**
      * - Used to navigate to destination with action handling the Navigation Controller
      * @param directions NavDirections action to navigate to.
@@ -160,6 +161,18 @@ abstract class BaseFragment(private val childFragmentName: String = String.empty
 
     private fun handleNetworkError() {
 //        showConnectionErrorView()
+    }
+
+    /**
+     * - Sets the Navigation Controller to specified view for later use of [createNavigateToIdResClickListener],[navigateWithActionToRes] or [navigateToDestinationRes].
+     * @param view View to attach navController to.
+     *
+     * - Example:
+     *  > setViewNavController(*floatingActionButton2*)
+     *  > floatingActionButton2.setOnClickListener(*createNavigateToIdResClickListener(R.id.flow_step_two_dest)*)
+     */
+    fun setViewNavController(view: View) {
+        Navigation.setViewNavController(view, navController)
     }
 
     /**
