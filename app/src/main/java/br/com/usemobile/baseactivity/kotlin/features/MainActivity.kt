@@ -17,6 +17,7 @@
 package br.com.usemobile.baseactivity.kotlin.features
 
 import android.os.Bundle
+import android.view.View
 import androidx.navigation.*
 import br.com.usemobile.baseactivity.kotlin.R
 import br.com.usemobile.baseactivity.kotlin.core.extension.activityMenu
@@ -34,7 +35,9 @@ class MainActivity : BaseActivity(activityMenu) {
     override fun onPostCreate(savedInstanceState: Bundle?) {
         super.onPostCreate(savedInstanceState)
         floatingActionButton2.setOnClickListener {
-//            findNavController(navHostFragment()).navigate(action)
+            //            findNavController(navHostFragment()).navigate(action)
+
+            notify("test")
         }
     }
 

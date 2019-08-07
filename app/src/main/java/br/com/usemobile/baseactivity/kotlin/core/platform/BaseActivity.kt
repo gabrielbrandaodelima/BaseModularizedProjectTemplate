@@ -3,8 +3,10 @@ package br.com.usemobile.baseactivity.kotlin.core.platform
 import android.os.Build
 import android.os.Bundle
 import android.os.Handler
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity;
 import android.widget.ProgressBar
+import androidx.annotation.StringRes
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.NavController
 import androidx.navigation.NavDestination
@@ -15,7 +17,9 @@ import br.com.usemobile.baseactivity.kotlin.R
 import br.com.usemobile.baseactivity.kotlin.core.extension.activityLogin
 import br.com.usemobile.baseactivity.kotlin.core.extension.activityMenu
 import br.com.usemobile.baseactivity.kotlin.core.extension.empty
+import com.google.android.material.snackbar.Snackbar
 import es.dmoral.toasty.Toasty
+import kotlinx.android.synthetic.main.activity_base.*
 import kotlinx.android.synthetic.main.progress_bar.*
 
 import kotlinx.android.synthetic.main.toolbar.*
@@ -79,9 +83,12 @@ abstract class BaseActivity(private val childActivityName: String = String.empty
 
     }
 
+    /**
+     * Set up Activity's Navigation Controller and it's destination changed listener
+     */
     private fun setUpNavControllerAndAppbar() {
         navController = Navigation.findNavController(this, navHostFragment())
-//        appBarConfiguration = AppBarConfiguration(navController.graph, drawerLayout)
+        appBarConfiguration = AppBarConfiguration(navController.graph, drawerLayout)
         navController.addOnDestinationChangedListener { controller, destination, bundle ->
             onDestinationChangedListener(controller, destination, bundle)
         }
@@ -133,6 +140,18 @@ abstract class BaseActivity(private val childActivityName: String = String.empty
         }
     }
 
+    /***
+     * Notify using Snackbar
+     * @param message String msg
+     */
+    fun notify(@StringRes message: String) =
+        Snackbar.make(actv_view, message, Snackbar.LENGTH_SHORT).show()
+
+    /**
+     * Display a Toasty message
+     * @param message String msg
+     * @param isErrorMessage set to true if is an error
+     */
     fun showMessage(message: String, isErrorMessage: Boolean = false) {
 
         if (isErrorMessage) {

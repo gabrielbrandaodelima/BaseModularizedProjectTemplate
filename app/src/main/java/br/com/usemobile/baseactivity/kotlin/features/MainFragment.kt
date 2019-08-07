@@ -40,10 +40,12 @@ class MainFragment : BaseFragment(activityMenu) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        navigate_destination_button.setOnClickListener (Navigation.createNavigateOnClickListener(R.id.next_action))
+        navigate_destination_button.setOnClickListener(createNavigateToIdResClickListener(R.id.flow_step_two_dest))
 
-        navigate_action_button.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.next_action_frag2))
-            findNavController(this).navigate(action)
+        navigate_action_button.setOnClickListener {
+            notify("test")
+            navigateWithActionToRes(action)
+        }
 
 
     }

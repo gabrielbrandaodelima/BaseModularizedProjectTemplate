@@ -19,6 +19,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.annotation.IdRes
 import androidx.annotation.StringRes
 import androidx.core.content.ContextCompat
 import androidx.drawerlayout.widget.DrawerLayout
@@ -26,7 +27,9 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.NavDestination
+import androidx.navigation.NavDirections
 import androidx.navigation.Navigation
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.NavigationUI.setupActionBarWithNavController
 import androidx.navigation.ui.navigateUp
@@ -79,6 +82,9 @@ abstract class BaseFragment(private val childFragmentName: String = String.empty
             progressBar.gone()
     }
 
+    /**
+     * Set up Fragment's Navigation Controller and it's destination changed listener
+     */
     private fun setUpNavController() {
         navController = activity?.let { Navigation.findNavController(it, navHostFragment()) }
         navController?.addOnDestinationChangedListener{controller, destination, arguments ->
@@ -97,6 +103,38 @@ abstract class BaseFragment(private val childFragmentName: String = String.empty
         navDestination = destination
     }
 
+    /**
+     *
+     * Used to navigate to destination Id handling the Navigation Controller
+     * @param id Resource Identifier to navigate to; ex. R.id.destination or R.id.action
+     *
+     */
+    fun navigateToDestinationRes(@IdRes id: Int) {
+        findNavController().navigate(id)
+    }
+    /**
+     * Used to navigate to destination with action handling the Navigation Controller
+     * @param directions NavDirections action to navigate to.
+     * Example: MainFragmentDirections.nextAction()
+     */
+    fun navigateWithActionToRes(directions: NavDirections) {
+        findNavController().navigate(directions)
+    }
+
+    /**
+     * Creates a click listener to resource Id using Navigation arch components
+     * @param id Resource Identifier to navigate to; ex. R.id.destination or R.id.action
+     * @return Click listener of type Navigation.createNavigateOnClickListener
+     */
+    fun createNavigateToIdResClickListener(@IdRes id: Int): View.OnClickListener {
+        return Navigation.createNavigateOnClickListener(id)
+    }
+
+    /**
+     * Method for handling viewModel's endpoints call failures.
+     *
+     * @param failure Failure of type [Failure]
+     */
     fun handleFailure(failure: Failure?) {
         when (failure) {
             is Failure.NetworkConnection -> {
@@ -116,14 +154,27 @@ abstract class BaseFragment(private val childFragmentName: String = String.empty
 //        showConnectionErrorView()
     }
 
+    /**
+     * Method for handling feature's specific failures.
+     *Override this for specific cases.
+     */
     open fun handleFeatureFailure() {
         showMessage("BaseFragment handleFeatureFailure", true)
 
     }
 
-    fun notify(@StringRes message: Int) =
+    /***
+     * Notify using Snackbar
+     * @param message String msg
+     */
+    fun notify(@StringRes message: String) =
         view?.let { Snackbar.make(it, message, Snackbar.LENGTH_SHORT).show() }
 
+    /**
+     * Display a Toasty message
+     * @param message String msg
+     * @param isErrorMessage Set to true if is an error
+     */
     fun showMessage(message: String, isErrorMessage: Boolean = false) {
 
         if (isErrorMessage) {
