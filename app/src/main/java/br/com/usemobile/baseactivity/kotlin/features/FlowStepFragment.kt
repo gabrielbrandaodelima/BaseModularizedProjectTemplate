@@ -35,19 +35,6 @@ import kotlinx.android.synthetic.main.flow_step_one_fragment.*
  * Presents how multiple steps flow could be implemented.
  */
 class FlowStepFragment : BaseFragment() {
-    override fun navController(): NavController? {
-        return activity?.let { Navigation.findNavController(it, navHostFragment()) }
-    }
-
-    override fun onDestinationChangedListener(
-        controller: NavController,
-        destination: NavDestination,
-        arguments: Bundle?
-    ) {
-
-    }
-
-    override fun navHostFragment(): Int = R.id.main_frag_nav_host_fragment
 
     override fun layoutId(): Int {
 
@@ -65,8 +52,8 @@ class FlowStepFragment : BaseFragment() {
         next_button.setOnClickListener {
             navigateToDestinationRes(R.id.next_action)
         }
-//        next_button.setOnClickListener(
-//            createNavigateToIdResClickListener(R.id.next_action)
-//        )
+        next_button.setOnClickListener(
+            createNavigateToIdResClickListener(R.id.next_action)
+        )
     }
 }

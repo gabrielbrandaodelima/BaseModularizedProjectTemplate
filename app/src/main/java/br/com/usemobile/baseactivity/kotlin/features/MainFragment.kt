@@ -23,15 +23,18 @@ import androidx.navigation.NavController
 import androidx.navigation.NavDestination
 import androidx.navigation.NavDirections
 import androidx.navigation.Navigation
+import androidx.navigation.fragment.findNavController
 import br.com.usemobile.baseactivity.kotlin.R
 import br.com.usemobile.baseactivity.kotlin.core.extension.activityMenu
 import br.com.usemobile.baseactivity.kotlin.core.platform.BaseFragment
+import br.com.usemobile.baseactivity.kotlin.core.platform.BaseNavigationFragment
 import kotlinx.android.synthetic.main.main_fragment.*
 
 /**
  * Fragment used to show how to navigate to another destination
  */
-class MainFragment : BaseFragment(activityMenu) {
+class MainFragment : BaseNavigationFragment(activityMenu) {
+
     override fun layoutId() = R.layout.main_fragment
 
     override fun navHostFragment(): Int = R.id.main_frag_nav_host_fragment
@@ -39,21 +42,33 @@ class MainFragment : BaseFragment(activityMenu) {
     override fun navController(): NavController? = activity?.let { Navigation.findNavController(it, navHostFragment()) }
 
     var action: NavDirections = HomeFragmentDirections.nextAction()
-    lateinit var flowViewModel: FlowViewModel
+    var flowViewModel: FlowViewModel? = null
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         flowViewModel = ViewModelProviders.of(this).get(FlowViewModel::class.java)
-//        navController = activity?.let { Navigation.findNavController(it, navHostFragment()) }
+
         floatingActionButton2.setOnClickListener{
-            navController()?.navigate(action)
+            navigateToDestinationRes(navController(), R.id.flow_step_two_dest)
         }
+
+//        setViewNavController(floatingActionButton2)
+//        floatingActionButton2.setOnClickListener(
+//            createNavigateToIdResClickListener(
+//                R.id.next_action
+//            )
+//        )
+
 
     }
 
-    override fun onDestinationChangedListener(controller: NavController, destination: NavDestination, arguments: Bundle?) {
-        flowViewModel.navDestination.value = destination
+    override fun onDestinationChangedListener(
+        controller: NavController,
+        destination: NavDestination,
+        arguments: Bundle?
+    ) {
+        flowViewModel?.navDestination?.value = destination
         when (destination.id) {
             R.id.home_fragment_dest -> action = HomeFragmentDirections.nextAction()
 //            R.id.mainFragment -> action = MainFragmentDirections.nextActionFrag2()

@@ -46,26 +46,15 @@ import es.dmoral.toasty.Toasty
 
 /**
  * Base Fragment class with helper methods for handling views and back button events.
- *
- * @see Fragment
+ *@param childFragmentName Child fragment's name for identification
+ * @see BaseNavigationFragment
  */
 abstract class BaseFragment(private val childFragmentName: String = String.empty()) : Fragment() {
 
-    abstract fun navController(): NavController?
-    private lateinit var navDestination: NavDestination
-    private var drawerLayout: DrawerLayout? = null
-
     abstract fun layoutId(): Int
-
-    abstract fun navHostFragment() : Int
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View =
         inflater.inflate(layoutId(), container, false)
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        setUpNavController()
-    }
 
     open fun onBackPressed() {
     }
@@ -81,21 +70,6 @@ abstract class BaseFragment(private val childFragmentName: String = String.empty
         if (this is BaseActivity)
             progressBar.gone()
     }
-
-    /**
-     * - Set up Fragment's Navigation Controller and it's destination changed listener
-     */
-    private fun setUpNavController() {
-        navController()?.addOnDestinationChangedListener { controller, destination, arguments ->
-            onDestinationChangedListener(controller, destination, arguments)
-        }
-    }
-
-    /**
-     * - Override on activity which extends [BaseActivity],
-     * to handle nav controller destination changed
-     */
-    abstract fun onDestinationChangedListener(controller: NavController,destination: NavDestination,arguments: Bundle?)
 
     /**
      *
@@ -128,6 +102,7 @@ abstract class BaseFragment(private val childFragmentName: String = String.empty
      * - Ex.
      * > *R.id.destination* or *R.id.action*
      * @return Click listener of type Navigation.createNavigateOnClickListener
+     * @throws java.lang.IllegalArgumentException when {id} is unknown to this NavController - must use Navigation.setViewNavController
      */
     fun createNavigateToIdResClickListener(@IdRes id: Int): View.OnClickListener {
         return Navigation.createNavigateOnClickListener(id)
@@ -155,18 +130,6 @@ abstract class BaseFragment(private val childFragmentName: String = String.empty
 
     private fun handleNetworkError() {
 //        showConnectionErrorView()
-    }
-
-    /**
-     * - Sets the Navigation Controller to specified view for later use of [createNavigateToIdResClickListener],[navigateWithActionToRes] or [navigateToDestinationRes].
-     * @param view View to attach navController to.
-     *
-     * - Example:
-     *  > setViewNavController(*floatingActionButton2*)
-     *  > floatingActionButton2.setOnClickListener(*createNavigateToIdResClickListener(R.id.flow_step_two_dest)*)
-     */
-    fun setViewNavController(view: View) {
-        Navigation.setViewNavController(view, navController())
     }
 
     /**

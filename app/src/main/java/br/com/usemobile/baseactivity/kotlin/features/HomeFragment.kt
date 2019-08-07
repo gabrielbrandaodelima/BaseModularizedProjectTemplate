@@ -22,6 +22,7 @@ import androidx.navigation.NavController
 import androidx.navigation.NavDestination
 import androidx.navigation.NavDirections
 import androidx.navigation.Navigation
+import androidx.navigation.fragment.findNavController
 import br.com.usemobile.baseactivity.kotlin.R
 import br.com.usemobile.baseactivity.kotlin.core.platform.BaseFragment
 import kotlinx.android.synthetic.main.home_fragment.*
@@ -30,19 +31,6 @@ import kotlinx.android.synthetic.main.home_fragment.*
  * Fragment used to show how to navigate to another destination
  */
 class HomeFragment : BaseFragment() {
-    override fun navController(): NavController? {
-        return activity?.let { Navigation.findNavController(it, navHostFragment()) }
-    }
-
-    override fun onDestinationChangedListener(
-        controller: NavController,
-        destination: NavDestination,
-        arguments: Bundle?
-    ) {
-
-    }
-
-    override fun navHostFragment(): Int = R.id.main_frag_nav_host_fragment
     override fun layoutId() = R.layout.home_fragment
 
 //    var action: NavDirections =
