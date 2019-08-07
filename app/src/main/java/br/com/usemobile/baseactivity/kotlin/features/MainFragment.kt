@@ -18,11 +18,11 @@ package br.com.usemobile.baseactivity.kotlin.features
 
 import android.os.Bundle
 import android.view.View
+import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.NavController
 import androidx.navigation.NavDestination
 import androidx.navigation.NavDirections
 import androidx.navigation.Navigation
-import androidx.navigation.fragment.findNavController
 import br.com.usemobile.baseactivity.kotlin.R
 import br.com.usemobile.baseactivity.kotlin.core.extension.activityMenu
 import br.com.usemobile.baseactivity.kotlin.core.platform.BaseFragment
@@ -33,24 +33,27 @@ import kotlinx.android.synthetic.main.main_fragment.*
  */
 class MainFragment : BaseFragment(activityMenu) {
     override fun layoutId() = R.layout.main_fragment
+
     override fun navHostFragment(): Int = R.id.main_frag_nav_host_fragment
 
+    override fun navController(): NavController? = activity?.let { Navigation.findNavController(it, navHostFragment()) }
+
     var action: NavDirections = HomeFragmentDirections.nextAction()
+    lateinit var flowViewModel: FlowViewModel
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        flowViewModel = ViewModelProviders.of(this).get(FlowViewModel::class.java)
+//        navController = activity?.let { Navigation.findNavController(it, navHostFragment()) }
         floatingActionButton2.setOnClickListener{
-            navigateToDestinationRes(R.id.flow_step_two_dest)
+            navController()?.navigate(action)
         }
-
-
-
 
     }
 
-    override fun onDestinationChangedListener(controller: NavController, destination: NavDestination, bundle: Bundle?) {
-
+    override fun onDestinationChangedListener(controller: NavController, destination: NavDestination, arguments: Bundle?) {
+        flowViewModel.navDestination.value = destination
         when (destination.id) {
             R.id.home_fragment_dest -> action = HomeFragmentDirections.nextAction()
 //            R.id.mainFragment -> action = MainFragmentDirections.nextActionFrag2()

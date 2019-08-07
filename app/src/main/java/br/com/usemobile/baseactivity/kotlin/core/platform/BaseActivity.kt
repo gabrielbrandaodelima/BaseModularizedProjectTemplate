@@ -9,6 +9,8 @@ import android.widget.ProgressBar
 import androidx.annotation.IdRes
 import androidx.annotation.StringRes
 import androidx.drawerlayout.widget.DrawerLayout
+import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.get
 import androidx.navigation.*
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.AppBarConfiguration

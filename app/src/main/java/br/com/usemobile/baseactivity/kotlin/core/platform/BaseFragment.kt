@@ -51,13 +51,13 @@ import es.dmoral.toasty.Toasty
  */
 abstract class BaseFragment(private val childFragmentName: String = String.empty()) : Fragment() {
 
-    private var navController: NavController? = null
+    abstract fun navController(): NavController?
     private lateinit var navDestination: NavDestination
     private var drawerLayout: DrawerLayout? = null
 
     abstract fun layoutId(): Int
 
-    open fun navHostFragment(): Int = R.id.base_atv_nav_host_fragment
+    abstract fun navHostFragment() : Int
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View =
         inflater.inflate(layoutId(), container, false)
@@ -86,8 +86,7 @@ abstract class BaseFragment(private val childFragmentName: String = String.empty
      * - Set up Fragment's Navigation Controller and it's destination changed listener
      */
     private fun setUpNavController() {
-        navController = findNavController()
-        navController?.addOnDestinationChangedListener { controller, destination, arguments ->
+        navController()?.addOnDestinationChangedListener { controller, destination, arguments ->
             onDestinationChangedListener(controller, destination, arguments)
         }
     }
@@ -96,12 +95,7 @@ abstract class BaseFragment(private val childFragmentName: String = String.empty
      * - Override on activity which extends [BaseActivity],
      * to handle nav controller destination changed
      */
-    open fun onDestinationChangedListener(
-        controller: NavController,
-        destination: NavDestination,
-        arguments: Bundle?
-    ) {
-    }
+    abstract fun onDestinationChangedListener(controller: NavController,destination: NavDestination,arguments: Bundle?)
 
     /**
      *
@@ -172,7 +166,7 @@ abstract class BaseFragment(private val childFragmentName: String = String.empty
      *  > floatingActionButton2.setOnClickListener(*createNavigateToIdResClickListener(R.id.flow_step_two_dest)*)
      */
     fun setViewNavController(view: View) {
-        Navigation.setViewNavController(view, navController)
+        Navigation.setViewNavController(view, navController())
     }
 
     /**
