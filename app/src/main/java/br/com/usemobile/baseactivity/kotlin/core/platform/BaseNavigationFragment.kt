@@ -25,10 +25,7 @@ import androidx.core.content.ContextCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.NavController
-import androidx.navigation.NavDestination
-import androidx.navigation.NavDirections
-import androidx.navigation.Navigation
+import androidx.navigation.*
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.NavigationUI.setupActionBarWithNavController
@@ -52,9 +49,29 @@ import es.dmoral.toasty.Toasty
 abstract class BaseNavigationFragment(private val childFragmentName: String = String.empty()) :
     BaseFragment(childFragmentName) {
 
+    /**
+     * - Child fragment's NavController , initiate it with :
+     * > *activity?.let { Navigation.findNavController(it, [navHostFragment]) }*
+     */
     abstract fun navController(): NavController?
     private var drawerLayout: DrawerLayout? = null
 
+    /**
+     * - NavOptions for using when passing a direct destination id using [navigateToDestinationRes]
+     */
+    val defNavOptions = navOptions {
+        anim {
+            enter = R.anim.nav_default_enter_anim
+            exit = R.anim.nav_default_exit_anim
+            popEnter = R.anim.nav_default_pop_enter_anim
+            popExit = R.anim.nav_default_pop_exit_anim
+
+        }
+    }
+
+    /**
+     * Fragment's navHostFragment parent which will handle navigation
+     */
     abstract fun navHostFragment(): Int
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -112,14 +129,35 @@ abstract class BaseNavigationFragment(private val childFragmentName: String = St
     /**
      *
      * - Used to navigate to destination Id handling the Navigation Controller
+     * @param navController NavController handler
      * @param id Resource Identifier to navigate to.
      *
      * - Ex.
      * > *R.id.destination* or *R.id.action*
+     * @param args Arguments to pass and retrieve using safeArgs later
+     * @param navOptions [NavOptions] to use in navigation, such as animations.
+     *
+     * - Ex:
+     *
+    val options = navOptions {
+
+    anim {
+
+         > enter = R.anim.slide_in_right
+
+    > exit = R.anim.slide_out_left
+
+    > popEnter = R.anim.slide_in_left
+
+    > popExit = R.anim.slide_out_right
+
+    >}
+
+    }
      *
      */
-    fun navigateToDestinationRes(navController: NavController?, @IdRes id: Int) {
-        navController?.navigate(id)
+    fun navigateToDestinationRes(navController: NavController?, @IdRes id: Int, args: Bundle? = null , navOptions: NavOptions? = null) {
+        navController?.navigate(id, args, navOptions)
     }
 
     /**

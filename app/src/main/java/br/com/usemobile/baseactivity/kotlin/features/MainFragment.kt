@@ -19,10 +19,7 @@ package br.com.usemobile.baseactivity.kotlin.features
 import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.ViewModelProviders
-import androidx.navigation.NavController
-import androidx.navigation.NavDestination
-import androidx.navigation.NavDirections
-import androidx.navigation.Navigation
+import androidx.navigation.*
 import androidx.navigation.fragment.findNavController
 import br.com.usemobile.baseactivity.kotlin.R
 import br.com.usemobile.baseactivity.kotlin.core.extension.activityMenu
@@ -42,15 +39,20 @@ class MainFragment : BaseNavigationFragment(activityMenu) {
     override fun navController(): NavController? = activity?.let { Navigation.findNavController(it, navHostFragment()) }
 
     var action: NavDirections = HomeFragmentDirections.nextAction()
+    var destinationId: Int = R.id.flow_step_one_dest
     var flowViewModel: FlowViewModel? = null
+
+    var navOptions = defNavOptions
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         flowViewModel = activity?.let { ViewModelProviders.of(it).get(FlowViewModel::class.java) }
 
-        floatingActionButton2.setOnClickListener{
-            navigateWithActionToRes(navController(), action)
+        floatingActionButton2.setOnClickListener {
+            //            navigateWithActionToRes(navController(), action)
+//            navigateToDestinationRes(navController(), R.id.flow_step_one_dest)
+            navigateToDestinationRes(navController(), destinationId, null, navOptions)
         }
 
 //        setViewNavController(floatingActionButton2)
@@ -70,9 +72,33 @@ class MainFragment : BaseNavigationFragment(activityMenu) {
     ) {
         flowViewModel?.navDestination?.value = destination
         when (destination.id) {
-            R.id.home_fragment_dest -> action = HomeFragmentDirections.nextAction()
+            R.id.home_fragment_dest -> {
+                action = HomeFragmentDirections.nextAction()
+                destinationId = R.id.flow_step_one_dest
+                navOptions = defNavOptions
+            }
 //            R.id.mainFragment -> action = MainFragmentDirections.nextActionFrag2()
-            R.id.flow_step_one_dest, R.id.flow_step_two_dest -> action = FlowStepFragmentDirections.nextAction()
+            R.id.flow_step_one_dest -> {
+                action = FlowStepFragmentDirections.nextAction()
+                destinationId = R.id.flow_step_two_dest
+                navOptions = defNavOptions
+
+            }
+            R.id.flow_step_two_dest -> {
+                action = FlowStepFragmentDirections.nextAction()
+                destinationId = R.id.home_fragment_dest
+                navOptions = navOptions {
+                    popUpTo = R.id.home_fragment_dest
+                    anim {
+                        enter = R.anim.nav_default_enter_anim
+                        exit = R.anim.nav_default_exit_anim
+                        popEnter = R.anim.nav_default_pop_enter_anim
+                        popExit = R.anim.nav_default_pop_exit_anim
+
+                    }
+                }
+
+            }
 
         }
     }
