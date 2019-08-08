@@ -1,0 +1,18 @@
+[
+    {
+        "merged": "C:\\Users\\usemobile\\StudioProjects\\BaseModularizedProjectTemplate\\nv\\build\\intermediates\\res\\merged\\debug\\menu\\main_menu.xml",
+        "source": "C:\\Users\\usemobile\\StudioProjects\\BaseModularizedProjectTemplate\\nv\\src\\main\\res\\menu\\main_menu.xml"
+    },
+    {
+        "merged": "C:\\Users\\usemobile\\StudioProjects\\BaseModularizedProjectTemplate\\nv\\build\\intermediates\\res\\merged\\debug\\menu\\nav_drawer_menu.xml",
+        "source": "C:\\Users\\usemobile\\StudioProjects\\BaseModularizedProjectTemplate\\nv\\src\\main\\res\\menu\\nav_drawer_menu.xml"
+    },
+    {
+        "merged": "C:\\Users\\usemobile\\StudioProjects\\BaseModularizedProjectTemplate\\nv\\build\\intermediates\\res\\merged\\debug\\menu\\overflow_menu.xml",
+        "source": "C:\\Users\\usemobile\\StudioProjects\\BaseModularizedProjectTemplate\\nv\\src\\main\\res\\menu\\overflow_menu.xml"
+    },
+    {
+        "merged": "C:\\Users\\usemobile\\StudioProjects\\BaseModularizedProjectTemplate\\nv\\build\\intermediates\\res\\merged\\debug\\menu\\bottom_nav_menu.xml",
+        "source": "C:\\Users\\usemobile\\StudioProjects\\BaseModularizedProjectTemplate\\nv\\src\\main\\res\\menu\\bottom_nav_menu.xml"
+    }
+]

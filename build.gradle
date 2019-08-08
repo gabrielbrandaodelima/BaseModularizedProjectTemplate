@@ -32,7 +32,7 @@ buildscript {
         navigationVersion = '1.0.0'
         networkingVersion = '1.0.0'
         realmGradlePlugin = '5.8.0'
-//        recyclerViewVersion = '1.0.0'
+        recyclerViewVersion = '1.0.0'
         retrofitVersion = '2.5.0'
 //        roomVersion = '2.1.0-alpha03'
 //        runnerVersion = '1.0.1'

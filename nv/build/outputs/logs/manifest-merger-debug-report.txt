@@ -1,0 +1,85 @@
+-- Merging decision tree log ---
+manifest
+ADDED from C:\Users\usemobile\StudioProjects\BaseModularizedProjectTemplate\nv\src\main\AndroidManifest.xml:17:1-53:12
+INJECTED from C:\Users\usemobile\StudioProjects\BaseModularizedProjectTemplate\nv\src\main\AndroidManifest.xml:17:1-53:12
+INJECTED from C:\Users\usemobile\StudioProjects\BaseModularizedProjectTemplate\nv\src\main\AndroidManifest.xml:17:1-53:12
+INJECTED from C:\Users\usemobile\StudioProjects\BaseModularizedProjectTemplate\nv\src\main\AndroidManifest.xml:17:1-53:12
+INJECTED from C:\Users\usemobile\StudioProjects\BaseModularizedProjectTemplate\nv\src\main\AndroidManifest.xml:17:1-53:12
+INJECTED from C:\Users\usemobile\StudioProjects\BaseModularizedProjectTemplate\nv\src\main\AndroidManifest.xml:17:1-53:12
+INJECTED from C:\Users\usemobile\StudioProjects\BaseModularizedProjectTemplate\nv\src\main\AndroidManifest.xml:17:1-53:12
+	package
+		ADDED from C:\Users\usemobile\StudioProjects\BaseModularizedProjectTemplate\nv\src\main\AndroidManifest.xml:19:11-60
+		INJECTED from C:\Users\usemobile\StudioProjects\BaseModularizedProjectTemplate\nv\src\main\AndroidManifest.xml
+		INJECTED from C:\Users\usemobile\StudioProjects\BaseModularizedProjectTemplate\nv\src\main\AndroidManifest.xml
+	android:versionName
+		INJECTED from C:\Users\usemobile\StudioProjects\BaseModularizedProjectTemplate\nv\src\main\AndroidManifest.xml
+		ADDED from C:\Users\usemobile\StudioProjects\BaseModularizedProjectTemplate\nv\src\main\AndroidManifest.xml:17:1-53:12
+		INJECTED from C:\Users\usemobile\StudioProjects\BaseModularizedProjectTemplate\nv\src\main\AndroidManifest.xml
+	xmlns:tools
+		ADDED from C:\Users\usemobile\StudioProjects\BaseModularizedProjectTemplate\nv\src\main\AndroidManifest.xml:18:11-57
+	android:versionCode
+		INJECTED from C:\Users\usemobile\StudioProjects\BaseModularizedProjectTemplate\nv\src\main\AndroidManifest.xml
+		ADDED from C:\Users\usemobile\StudioProjects\BaseModularizedProjectTemplate\nv\src\main\AndroidManifest.xml:17:1-53:12
+		INJECTED from C:\Users\usemobile\StudioProjects\BaseModularizedProjectTemplate\nv\src\main\AndroidManifest.xml
+	xmlns:android
+		ADDED from C:\Users\usemobile\StudioProjects\BaseModularizedProjectTemplate\nv\src\main\AndroidManifest.xml:17:11-69
+application
+ADDED from C:\Users\usemobile\StudioProjects\BaseModularizedProjectTemplate\nv\src\main\AndroidManifest.xml:21:5-51:19
+	android:supportsRtl
+		ADDED from C:\Users\usemobile\StudioProjects\BaseModularizedProjectTemplate\nv\src\main\AndroidManifest.xml:24:9-35
+	android:label
+		ADDED from C:\Users\usemobile\StudioProjects\BaseModularizedProjectTemplate\nv\src\main\AndroidManifest.xml:23:9-41
+	tools:ignore
+		ADDED from C:\Users\usemobile\StudioProjects\BaseModularizedProjectTemplate\nv\src\main\AndroidManifest.xml:26:9-48
+	android:icon
+		ADDED from C:\Users\usemobile\StudioProjects\BaseModularizedProjectTemplate\nv\src\main\AndroidManifest.xml:22:9-43
+	android:theme
+		ADDED from C:\Users\usemobile\StudioProjects\BaseModularizedProjectTemplate\nv\src\main\AndroidManifest.xml:25:9-40
+activity#com.example.android.codelabs.navigation.MainActivity
+ADDED from C:\Users\usemobile\StudioProjects\BaseModularizedProjectTemplate\nv\src\main\AndroidManifest.xml:27:9-39:20
+	android:name
+		ADDED from C:\Users\usemobile\StudioProjects\BaseModularizedProjectTemplate\nv\src\main\AndroidManifest.xml:27:19-47
+intent-filter#action:name:android.intent.action.MAIN+category:name:android.intent.category.DEFAULT+category:name:android.intent.category.LAUNCHER
+ADDED from C:\Users\usemobile\StudioProjects\BaseModularizedProjectTemplate\nv\src\main\AndroidManifest.xml:28:13-33:29
+action#android.intent.action.MAIN
+ADDED from C:\Users\usemobile\StudioProjects\BaseModularizedProjectTemplate\nv\src\main\AndroidManifest.xml:29:17-69
+	android:name
+		ADDED from C:\Users\usemobile\StudioProjects\BaseModularizedProjectTemplate\nv\src\main\AndroidManifest.xml:29:25-66
+category#android.intent.category.DEFAULT
+ADDED from C:\Users\usemobile\StudioProjects\BaseModularizedProjectTemplate\nv\src\main\AndroidManifest.xml:31:17-76
+	android:name
+		ADDED from C:\Users\usemobile\StudioProjects\BaseModularizedProjectTemplate\nv\src\main\AndroidManifest.xml:31:27-73
+category#android.intent.category.LAUNCHER
+ADDED from C:\Users\usemobile\StudioProjects\BaseModularizedProjectTemplate\nv\src\main\AndroidManifest.xml:32:17-77
+	android:name
+		ADDED from C:\Users\usemobile\StudioProjects\BaseModularizedProjectTemplate\nv\src\main\AndroidManifest.xml:32:27-74
+receiver#com.example.android.codelabs.navigation.DeepLinkAppWidgetProvider
+ADDED from C:\Users\usemobile\StudioProjects\BaseModularizedProjectTemplate\nv\src\main\AndroidManifest.xml:41:9-49:20
+	android:name
+		ADDED from C:\Users\usemobile\StudioProjects\BaseModularizedProjectTemplate\nv\src\main\AndroidManifest.xml:41:19-60
+intent-filter#action:name:android.appwidget.action.APPWIDGET_UPDATE
+ADDED from C:\Users\usemobile\StudioProjects\BaseModularizedProjectTemplate\nv\src\main\AndroidManifest.xml:42:13-44:29
+action#android.appwidget.action.APPWIDGET_UPDATE
+ADDED from C:\Users\usemobile\StudioProjects\BaseModularizedProjectTemplate\nv\src\main\AndroidManifest.xml:43:17-84
+	android:name
+		ADDED from C:\Users\usemobile\StudioProjects\BaseModularizedProjectTemplate\nv\src\main\AndroidManifest.xml:43:25-81
+meta-data#android.appwidget.provider
+ADDED from C:\Users\usemobile\StudioProjects\BaseModularizedProjectTemplate\nv\src\main\AndroidManifest.xml:46:13-48:68
+	android:resource
+		ADDED from C:\Users\usemobile\StudioProjects\BaseModularizedProjectTemplate\nv\src\main\AndroidManifest.xml:48:17-65
+	android:name
+		ADDED from C:\Users\usemobile\StudioProjects\BaseModularizedProjectTemplate\nv\src\main\AndroidManifest.xml:47:17-58
+uses-sdk
+INJECTED from C:\Users\usemobile\StudioProjects\BaseModularizedProjectTemplate\nv\src\main\AndroidManifest.xml reason: use-sdk injection requested
+INJECTED from C:\Users\usemobile\StudioProjects\BaseModularizedProjectTemplate\nv\src\main\AndroidManifest.xml
+INJECTED from C:\Users\usemobile\StudioProjects\BaseModularizedProjectTemplate\nv\src\main\AndroidManifest.xml
+INJECTED from C:\Users\usemobile\StudioProjects\BaseModularizedProjectTemplate\nv\src\main\AndroidManifest.xml
+INJECTED from C:\Users\usemobile\StudioProjects\BaseModularizedProjectTemplate\nv\src\main\AndroidManifest.xml
+	android:targetSdkVersion
+		INJECTED from C:\Users\usemobile\StudioProjects\BaseModularizedProjectTemplate\nv\src\main\AndroidManifest.xml
+		ADDED from C:\Users\usemobile\StudioProjects\BaseModularizedProjectTemplate\nv\src\main\AndroidManifest.xml
+		INJECTED from C:\Users\usemobile\StudioProjects\BaseModularizedProjectTemplate\nv\src\main\AndroidManifest.xml
+	android:minSdkVersion
+		INJECTED from C:\Users\usemobile\StudioProjects\BaseModularizedProjectTemplate\nv\src\main\AndroidManifest.xml
+		ADDED from C:\Users\usemobile\StudioProjects\BaseModularizedProjectTemplate\nv\src\main\AndroidManifest.xml
+		INJECTED from C:\Users\usemobile\StudioProjects\BaseModularizedProjectTemplate\nv\src\main\AndroidManifest.xml
